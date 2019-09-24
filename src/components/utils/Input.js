@@ -37,6 +37,8 @@ const Input = props => {
           disabled={ctx.disabled}
           size={props.size ? props.size : "sm"}
           className={props.cls}
+          as={props.as}
+          rows="3"
         />
       )}
     </DataConsumer>

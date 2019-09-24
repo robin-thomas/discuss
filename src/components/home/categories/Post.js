@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 
-import { Modal, Col, Row, Button, Form } from "react-bootstrap";
+import { Modal, Col, Row } from "react-bootstrap";
+
+import Input from "../../utils/Input";
+import SpinnerButton from "../../utils/SpinnerButton";
 
 const Post = () => {
   const [show, setShow] = useState(false);
+  const [fail, setFail] = useState({
+    title: true,
+    content: true
+  });
+
+  const onSubmit = async e => {
+    // TODO: create a new category.
+
+    setShow(false);
+
+    // TODO: trigger reload of categories view.
+  };
 
   return (
     <Row>
@@ -17,16 +32,54 @@ const Post = () => {
         <Modal.Header closeButton />
         <Modal.Body>
           <h5>Create New Post</h5>
-          <p>Create a new category. No admins or moderation.</p>
+          <p>Create a new post. No admins or moderation.</p>
           <br />
           <Row>
             <Col md="7">
-              <Form.Control placeholder="Category name" />
+              <Input
+                placeholder="Post title"
+                validate={text => {
+                  const validate = /^([a-zA-Z _-]+)$/.test(text);
+                  setFail(fail => {
+                    return { ...fail, title: !validate };
+                  });
+                  return { validate };
+                }}
+              />
             </Col>
           </Row>
           <Row>
+            <Col>&nbsp;</Col>
+          </Row>
+          <Row>
             <Col>
-              <Button variant="outline-dark">Create</Button>
+              <Input
+                as="textarea"
+                placeholder="Post content"
+                validate={text => {
+                  const validate =
+                    text !== null &&
+                    text !== undefined &&
+                    text.trim().length > 0;
+                  setFail(fail => {
+                    return { ...fail, content: !validate };
+                  });
+                  return { validate };
+                }}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col>&nbsp;</Col>
+          </Row>
+          <Row>
+            <Col>
+              <SpinnerButton
+                variant="outline-dark"
+                text="Create"
+                onClick={onSubmit}
+                disable={fail.title || fail.content}
+              />
             </Col>
           </Row>
           <br />
