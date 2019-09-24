@@ -63,7 +63,7 @@ const Arweave = {
     transaction.addTag("Type", "Post");
 
     await Arweave.getClient().transactions.sign(transaction, Arweave.wallet);
-    const response = await Arweave.getClient().transactions.post(transaction);
+    return await Arweave.getClient().transactions.post(transaction);
   }
 };
 

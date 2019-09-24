@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import Post from "./Post";
+import Category from "./Category";
 import { DataConsumer } from "../../utils/DataProvider";
 
 import "./Categories.css";
@@ -14,6 +16,9 @@ const Categories = props => {
     setActiveIndex(index);
   };
 
+  const [showCreateCategory, setShowCreateCategory] = useState(false);
+  const [showCreatePost, setShowCreatePost] = useState(false);
+
   return (
     <div style={{ overflow: "hidden" }}>
       <DataConsumer>
@@ -21,13 +26,24 @@ const Categories = props => {
           ctx.address ? (
             <div>
               <Row>
-                <Col className="App-categories-create-post text-center">
+                <Col
+                  className="App-categories-create-post text-center"
+                  onClick={() => setShowCreatePost(true)}
+                >
                   <span>Create Post</span>
+                  <Post show={showCreatePost} setShow={setShowCreatePost} />
                 </Col>
               </Row>
               <Row>
-                <Col className="App-categories-create-category text-center">
+                <Col
+                  className="App-categories-create-category text-center"
+                  onClick={() => setShowCreateCategory(true)}
+                >
                   <span>Create Category</span>
+                  <Category
+                    show={showCreateCategory}
+                    setShow={setShowCreateCategory}
+                  />
                 </Col>
               </Row>
               <Row>

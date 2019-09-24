@@ -21,7 +21,10 @@
 .App-categories-category {
   font-size: 15px;
   color: rgb(255, 255, 255);
-  transition: color 0.1s ease 0s;
+}
+
+.App-categories-category > a {
+  transition: all 0.3s;
 }
 
 .App-categories-category:not(.active) > a:hover {
@@ -74,4 +77,10 @@
   justify-content: center;
   align-items: center;
   color: white;
+  transition: all 0.3s;
+}
+
+.App-categories-create-category:hover,
+.App-categories-create-post:hover {
+  filter: brightness(110%);
 }
