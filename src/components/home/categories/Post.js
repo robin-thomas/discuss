@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Modal, Col, Row, Button } from "react-bootstrap";
+import { Modal, Col, Row, Button, Form } from "react-bootstrap";
 
 const Post = () => {
   const [show, setShow] = useState(false);
@@ -17,19 +17,16 @@ const Post = () => {
         <Modal.Header closeButton />
         <Modal.Body>
           <h5>Create New Post</h5>
-          <p>No registration. No passwords. </p>
+          <p>Create a new category. No admins or moderation.</p>
           <br />
           <Row>
-            <Col md="3">
-              <Button variant="outline-dark">Browse</Button>
+            <Col md="7">
+              <Form.Control placeholder="Category name" />
             </Col>
-            <Col md="9" className="ml-auto">
-              <p>
-                <i>Upload arweave keystore json file to login.</i>
-              </p>
-              <p>
-                <i>Its not stored on any servers.</i>
-              </p>
+          </Row>
+          <Row>
+            <Col>
+              <Button variant="outline-dark">Create</Button>
             </Col>
           </Row>
           <br />

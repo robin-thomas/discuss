@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 
-import { Modal, Col, Row, Button } from "react-bootstrap";
+import { Modal, Col, Row } from "react-bootstrap";
+
+import Input from "../../utils/Input";
+import SpinnerButton from "../../utils/SpinnerButton";
 
 const Category = () => {
   const [show, setShow] = useState(false);
+  const [disableButton, setDisableButton] = useState(true);
+
+  const onSubmit = async () => {
+    // TODO: create a new category.
+
+    setShow(false);
+
+    // TODO: trigger reload of categories view.
+  };
 
   return (
     <Row>
@@ -17,19 +29,31 @@ const Category = () => {
         <Modal.Header closeButton />
         <Modal.Body>
           <h5>Create New Category</h5>
-          <p>No registration. No passwords. </p>
+          <p>Create a new category. No admins or moderation.</p>
           <br />
           <Row>
-            <Col md="3">
-              <Button variant="outline-dark">Browse</Button>
+            <Col md="7">
+              <Input
+                placeholder="Category name"
+                validate={text => {
+                  const validate = /^([a-zA-Z_-]+)$/.test(text);
+                  setDisableButton(!validate);
+                  return { validate };
+                }}
+              />
             </Col>
-            <Col md="9" className="ml-auto">
-              <p>
-                <i>Upload arweave keystore json file to login.</i>
-              </p>
-              <p>
-                <i>Its not stored on any servers.</i>
-              </p>
+          </Row>
+          <Row>
+            <Col>&nbsp;</Col>
+          </Row>
+          <Row>
+            <Col>
+              <SpinnerButton
+                variant="outline-dark"
+                text="Create"
+                onClick={onSubmit}
+                disable={disableButton}
+              />
             </Col>
           </Row>
           <br />
