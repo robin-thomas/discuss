@@ -19,7 +19,7 @@ const Header = props => {
             {config.app.name}
           </Col>
           <Col md="auto" className="ml-auto align-self-center">
-            <a className="App-header-link" href="#" onClick={onClick}>
+            <a className="App-header-link" onClick={onClick}>
               Log In
             </a>
           </Col>

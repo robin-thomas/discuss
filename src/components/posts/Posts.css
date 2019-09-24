@@ -1,48 +1,9 @@
-.App-header {
+.App-posts {
   color: white;
-  margin-bottom: 24px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px;
-  height: 48px;
   background-color: rgb(38, 38, 38);
-  border-bottom: 1px solid rgb(51, 51, 51);
-}
-
-.App-header > .container {
-  max-width: calc(100% - 20%);
-}
-
-.App-header-name {
-  font-size: 24px;
-  font-weight: 500;
-  color: rgb(255, 255, 255);
-}
-
-.App-header-link {
-  text-transform: uppercase;
-  text-decoration: none;
-  color: rgb(176, 184, 191);
-  transition: color 0.1s ease 0s;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-}
-
-.App-header-link:hover {
-  text-decoration: none;
-  color: rgb(51, 160, 255);
-}
-
-.App-header-link::after {
-  content: "";
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: -12px;
-  opacity: 0;
-  transition: opacity 0.1s ease 0s, border-bottom-width 0.1s ease 0s;
-  border-bottom: 3px solid rgb(51, 160, 255);
-}
-
-.App-header-link:hover::after {
-  opacity: 1;
+  border-left: 1px solid rgb(51, 51, 51);
+  border-right: 1px solid rgb(51, 51, 51);
+  border-top: 1px solid rgb(51, 51, 51);
+  border-radius: 2px;
+  overflow: hidden;
 }

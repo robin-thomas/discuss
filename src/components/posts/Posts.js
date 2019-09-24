@@ -1,27 +1,46 @@
 import React from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
+import Post from "./Post";
 
-import * as config from "../../config.json";
+import "./Posts.css";
 
 const Posts = props => {
-  const onClick = e => {
-    e.preventDefault();
-  };
+  const posts = [
+    {
+      title: "Amazing clone",
+      votes: 12,
+      content: "Discuss is a full stack clone of reddit",
+      comments: 1,
+      category: "programming",
+      user: "john",
+      timestamp: 1569298544
+    },
+    {
+      title: "Hello",
+      votes: 65,
+      content: "Hello all therw!",
+      comments: 2,
+      category: "fun",
+      user: "dan",
+      timestamp: 1569298544
+    },
+    {
+      title: "The entire Shrek movie, remade by over 200 people",
+      votes: 33,
+      content:
+        "Now you can share your very insightful thoughts with the world. Theres a lot more things that need to be worked on...",
+      comments: 3,
+      category: "music",
+      user: "robin"
+    }
+  ];
 
   return (
-    <header className="App-header">
-      <Row style={{ height: "100%" }}>
-        <Col md="2" className="App-header-name align-self-center">
-          {config.app.name}
-        </Col>
-        <Col md="auto" className="ml-auto align-self-center">
-          <a className="App-header-link" href="#" onClick={onClick}>
-            Log In
-          </a>
-        </Col>
-      </Row>
-    </header>
+    <div className="App-posts">
+      {posts.map((post, index) => (
+        <Post key={index} post={post} />
+      ))}
+    </div>
   );
 };
 
