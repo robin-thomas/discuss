@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import { DataConsumer } from "../../utils/DataProvider";
 import Moment from "../../utils/Moment";
 
 import "./Post.css";
@@ -24,15 +25,31 @@ const Post = ({
           <Row className={`${blur ? "App-post-blur" : ""}`} onClick={onClick}>
             <Col md="auto" className="App-post-vote text-center pr-0">
               <div>
-                <Row>
-                  <Col className="App-post-vote-vote">▲</Col>
-                </Row>
+                <DataConsumer>
+                  {ctx =>
+                    ctx.address ? (
+                      <Row>
+                        <Col className="App-post-vote-vote">▲</Col>
+                      </Row>
+                    ) : (
+                      <Row>
+                        <Col>&nbsp;</Col>
+                      </Row>
+                    )
+                  }
+                </DataConsumer>
                 <Row>
                   <Col className="App-post-vote-count">{votes}</Col>
                 </Row>
-                <Row>
-                  <Col className="App-post-vote-vote">▼</Col>
-                </Row>
+                <DataConsumer>
+                  {ctx =>
+                    ctx.address ? (
+                      <Row>
+                        <Col className="App-post-vote-vote">▼</Col>
+                      </Row>
+                    ) : null
+                  }
+                </DataConsumer>
               </div>
             </Col>
             <Col md="11">
