@@ -4,10 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./scripts/start.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "export": "hello",
     "deploy": "npm run build && npm run export && npm run deploy:dapp",
     "deploy:dapp": "arweave deploy out/packaged.html --key-file arweave-keyfile.json"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "repository": {
     "type": "git",
@@ -34,9 +52,11 @@
     "@rauschma/stringio": "^1.4.0",
     "husky": "^3.0.5",
     "lint-staged": "^9.3.0",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.1.2"
   },
-  "dependencies": {
-    "lodash": "^4.17.15"
-  }
+  "dependencies": {}
 }
