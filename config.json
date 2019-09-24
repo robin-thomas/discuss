@@ -1,18 +1,10 @@
 {
-  "network": {
-    "name": "ropsten",
-    "network_id": "3"
+  "app": {
+    "name": "discuss"
   },
-  "infura": {
-    "ipfs": {
-      "host": "ipfs.infura.io",
-      "gateway": "https://ipfs.infura.io/ipfs/",
-      "port": 5001,
-      "protocol": "https"
-    }
-  },
-  "graph": {
-    "api": "https://api.thegraph.com/subgraphs/name/robin-thomas/discuss",
-    "subscription": "wss://api.thegraph.com/subgraphs/name/robin-thomas/discuss"
+  "arweave": {
+    "host": "arweave.net",
+    "port": 443,
+    "protocol": "https"
   }
 }
