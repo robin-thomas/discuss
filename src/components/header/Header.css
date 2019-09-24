@@ -18,7 +18,7 @@
   text-transform: uppercase;
   text-decoration: none;
   color: rgb(176, 184, 191) !important;
-  transition: color 0.1s ease 0s;
+  transition: all 0.3s;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.05em;
@@ -37,7 +37,7 @@
   right: 0px;
   bottom: -12px;
   opacity: 0;
-  transition: opacity 0.1s ease 0s, border-bottom-width 0.1s ease 0s;
+  transition: all 0.3s;
   border-bottom: 3px solid rgb(51, 160, 255);
 }
 
