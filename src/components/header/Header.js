@@ -41,14 +41,18 @@ const Header = props => {
 
       const fr = new FileReader();
       fr.onload = async evt => {
-        const wallet = JSON.parse(evt.target.result);
-        const address = await Arweave.getAddress(wallet);
-        ctx.setWallet(wallet);
-        ctx.setAddress(address);
+        try {
+          const wallet = JSON.parse(evt.target.result);
+          const address = await Arweave.getAddress(wallet);
+          ctx.setWallet(wallet);
+          ctx.setAddress(address);
 
-        setShow(false);
+          setShow(false);
 
-        document.getElementById("root").removeChild(file);
+          document.getElementById("root").removeChild(file);
+        } catch (err) {
+          alert("Invalid arweave keystore file!");
+        }
       };
       fr.readAsText(f);
     };
