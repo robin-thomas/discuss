@@ -68,7 +68,7 @@ const Header = props => {
                 <a className="App-header-link" onClick={() => onClick(ctx)}>
                   {ctx.address === null
                     ? "Log In"
-                    : `${ctx.address.substr(0, 10)}...`}
+                    : `${ctx.address.substr(0, 15)}...`}
                 </a>
               )}
             </DataConsumer>

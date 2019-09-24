@@ -17,7 +17,7 @@ const Posts = props => {
     },
     {
       title: "Hello",
-      votes: 65,
+      votes: -1,
       content: "Hello all therw!",
       comments: 2,
       category: "fun",

@@ -15,33 +15,45 @@ const Categories = props => {
   };
 
   return (
-    <div className="App-categories">
+    <div style={{ overflow: "hidden" }}>
       <DataConsumer>
         {ctx =>
           ctx.address ? (
-            <Row>
-              <Col className="App-categories-create-post text-center">
-                <span>Create Post</span>
-              </Col>
-            </Row>
+            <div>
+              <Row>
+                <Col className="App-categories-create-post text-center">
+                  <span>Create Post</span>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="App-categories-create-category text-center">
+                  <span>Create Category</span>
+                </Col>
+              </Row>
+              <Row>
+                <Col>&nbsp;</Col>
+              </Row>
+            </div>
           ) : null
         }
       </DataConsumer>
-      <Row>
-        <Col className="App-categories-title text-center">Categories</Col>
-      </Row>
-      {categories.map((category, index) => (
-        <Row key={index} style={{ height: "40px" }}>
-          <Col
-            className={`App-categories-category ${
-              index === activeIndex ? "active" : ""
-            } align-self-center`}
-            onClick={() => onClick(index)}
-          >
-            <a>{category}</a>
-          </Col>
+      <div className="App-categories">
+        <Row>
+          <Col className="App-categories-title text-center">Categories</Col>
         </Row>
-      ))}
+        {categories.map((category, index) => (
+          <Row key={index} style={{ height: "40px" }}>
+            <Col
+              className={`App-categories-category ${
+                index === activeIndex ? "active" : ""
+              } align-self-center`}
+              onClick={() => onClick(index)}
+            >
+              <a>{category}</a>
+            </Col>
+          </Row>
+        ))}
+      </div>
     </div>
   );
 };

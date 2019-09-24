@@ -2,6 +2,34 @@
   border-bottom: 1px solid rgb(51, 51, 51);
 }
 
+.App-post-blur {
+  transition: all 0.3s;
+}
+
+.App-post-blur > * {
+  filter: blur(8px);
+}
+
+.App-post-blur::before {
+  content: "*** Click here to show this post ***";
+  z-index: 1000;
+  position: absolute;
+  filter: blur(0);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 25px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-post-blur:hover {
+  box-shadow: inset 0 0 2em rgba(0, 0, 0, 0.25);
+}
+
 .App-post-vote {
   border-right: 1px solid rgb(51, 51, 51);
 }
