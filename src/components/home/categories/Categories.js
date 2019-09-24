@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import { DataConsumer } from "../../utils/DataProvider";
+
 import "./Categories.css";
 
 const Categories = props => {
@@ -14,6 +16,17 @@ const Categories = props => {
 
   return (
     <div className="App-categories">
+      <DataConsumer>
+        {ctx =>
+          ctx.address ? (
+            <Row>
+              <Col className="App-categories-create-post text-center">
+                <span>Create Post</span>
+              </Col>
+            </Row>
+          ) : null
+        }
+      </DataConsumer>
       <Row>
         <Col className="App-categories-title text-center">Categories</Col>
       </Row>
