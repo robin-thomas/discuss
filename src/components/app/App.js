@@ -2,9 +2,9 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import Header from "../header";
-import Posts from "../posts";
-import Categories from "../categories";
+import Header from "../home/header";
+import Posts from "../home/posts";
+import Categories from "../home/categories";
 
 function App() {
   return (

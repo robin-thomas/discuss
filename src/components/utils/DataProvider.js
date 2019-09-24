@@ -4,7 +4,8 @@ const DataContext = React.createContext();
 
 const DataProvider = props => {
   const [disabled, setDisabled] = useState(true);
-  const [walletConnected, setWalletConnected] = useState(false);
+  const [address, setAddress] = useState(null);
+  const [wallet, setWallet] = useState(null);
   const [colorClass, setColorClass] = useState(null);
   const [page, setPage] = useState("home");
 
@@ -13,8 +14,10 @@ const DataProvider = props => {
       value={{
         disabled,
         setDisabled,
-        walletConnected,
-        setWalletConnected,
+        address,
+        setAddress,
+        wallet,
+        setWallet,
         colorClass,
         setColorClass,
         page,

@@ -4,8 +4,6 @@ import { Row, Col } from "react-bootstrap";
 
 import "./Categories.css";
 
-import * as config from "../../config.json";
-
 const Categories = props => {
   const categories = ["all", "hello", "funny", "videos"];
 

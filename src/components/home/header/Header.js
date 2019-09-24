@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import "./Header.css";
 
-import * as config from "../../config.json";
+import * as config from "../../../config.json";
 
 const Header = props => {
   const onClick = e => {

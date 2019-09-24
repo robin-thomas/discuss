@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "discuss"
+    "name": "discuss",
+    "version": "1.0.0"
   },
   "arweave": {
     "host": "arweave.net",

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Row, Col } from "react-bootstrap";
 
-import Moment from "../utils/Moment";
+import Moment from "../../utils/Moment";
 
 import "./Post.css";
 
