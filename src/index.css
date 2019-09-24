@@ -22,3 +22,18 @@ code {
 .container {
   max-width: calc(100% - 20%) !important;
 }
+
+.modal-content {
+  /* background-color: rgb(38, 38, 38) !important; */
+}
+
+.modal-header {
+  border-bottom: 0 !important;
+}
+
+.modal-body p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  margin-bottom: 0 !important;
+}

@@ -18,7 +18,7 @@ const Categories = props => {
         <Col className="App-categories-title text-center">Categories</Col>
       </Row>
       {categories.map((category, index) => (
-        <Row style={{ height: "40px" }}>
+        <Row key={index} style={{ height: "40px" }}>
           <Col
             className={`App-categories-category ${
               index === activeIndex ? "active" : ""

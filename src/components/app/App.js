@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import Header from "../home/header";
+import Header from "../header";
 import Posts from "../home/posts";
 import Categories from "../home/categories";
 
