@@ -12,6 +12,9 @@
   font-weight: 500;
   color: rgb(176, 184, 191);
   text-transform: capitalize;
+}
+
+.App-header-name > span {
   cursor: pointer;
 }
 
