@@ -23,9 +23,7 @@ const SpinnerButton = ({ text, onClick, variant, disable }) => {
       alert(err.message);
     }
 
-    if (onClick) {
-      setDisabled(false);
-    }
+    setDisabled(false);
     ctx.setDisabled(false);
   };
 

@@ -38,7 +38,10 @@ const Posts = props => {
   return (
     <div className="App-posts">
       {posts.map((post, index) => (
-        <Post key={index} post={post} />
+        <div>
+          <Post key={index} post={post} />
+          <br />
+        </div>
       ))}
     </div>
   );

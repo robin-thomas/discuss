@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -8,24 +8,47 @@ import SpinnerButton from "../utils/SpinnerButton";
 import "./Comment.css";
 
 const Comment = props => {
+  const [disableButton, setDisableButton] = useState(true);
+
   return (
     <div className="App-comment">
       <Row>
         <Col>
-          <div style={{ padding: "10px" }}>
+          <p
+            style={{
+              paddingLeft: "2px",
+              fontSize: "12px",
+              marginBottom: "3px"
+            }}
+          >
+            Comment as robin
+          </p>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div>
             <Input
               as="textarea"
-              placeholder="enter your comment"
+              placeholder="What are your throughts?"
               cls="App-comment-textarea"
+              validate={text => {
+                const validate =
+                  text !== null && text !== undefined && text.trim().length > 0;
+                setDisableButton(!validate);
+                return { validate };
+              }}
             />
           </div>
         </Col>
       </Row>
-      <Row
-        style={{ marginTop: "10px", marginBottom: "10px", marginRight: "0px" }}
-      >
+      <Row style={{ marginTop: "10px", marginBottom: "10px" }}>
         <Col md="auto" className="ml-auto">
-          <SpinnerButton variant="outline-primary" text="Add Comment" />
+          <SpinnerButton
+            variant="outline-primary"
+            text="Add Comment"
+            disable={disableButton}
+          />
         </Col>
       </Row>
     </div>

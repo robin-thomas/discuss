@@ -11,10 +11,10 @@ const Home = props => (
     <Header />
     <Container>
       <Row>
-        <Col md="10">
+        <Col md="9">
           <Posts />
         </Col>
-        <Col md="2">
+        <Col md="3">
           <Categories />
         </Col>
       </Row>

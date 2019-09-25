@@ -56,7 +56,7 @@ const Post = ({
                 </DataConsumer>
               </div>
             </Col>
-            <Col md="11">
+            <Col>
               <Row>
                 <Col className="App-post-title">
                   <DataConsumer>

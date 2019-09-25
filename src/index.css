@@ -11,16 +11,12 @@ body {
 }
 
 body {
-  background-color: rgb(27, 27, 27) !important;
+  background-color: #000 !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.container {
-  max-width: calc(100% - 20%) !important;
 }
 
 .modal-content {
