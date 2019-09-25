@@ -15,6 +15,10 @@ import * as config from "../../config.json";
 const Header = props => {
   const [show, setShow] = useState(false);
 
+  const home = ctx => {
+    ctx.setPage("home");
+  };
+
   const onClick = ctx => {
     if (ctx.address !== null) {
       // Logout.
@@ -64,7 +68,9 @@ const Header = props => {
       <Container style={{ height: "100%" }}>
         <Row style={{ height: "100%" }}>
           <Col md="2" className="App-header-name align-self-center">
-            {config.app.name}
+            <DataConsumer>
+              {ctx => <span onClick={() => home(ctx)}>{config.app.name}</span>}
+            </DataConsumer>
           </Col>
           <Col md="auto" className="ml-auto align-self-center">
             <DataConsumer>

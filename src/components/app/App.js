@@ -1,27 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
-
-import Header from "../header";
-import Posts from "../home/posts";
-import Categories from "../home/categories";
+import getComponent from "./Component";
+import { DataContext } from "../utils/DataProvider";
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <Container>
-        <Row>
-          <Col md="10">
-            <Posts />
-          </Col>
-          <Col md="2">
-            <Categories />
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
+  const ctx = useContext(DataContext);
+
+  return <div className="App">{getComponent(ctx.page)}</div>;
 }
 
 export default App;

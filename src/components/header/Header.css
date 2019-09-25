@@ -12,6 +12,7 @@
   font-weight: 500;
   color: rgb(176, 184, 191);
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 .App-header-link {

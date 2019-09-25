@@ -18,6 +18,10 @@ const Post = ({
     }
   };
 
+  const postClick = ctx => {
+    ctx.setPage("post");
+  };
+
   return (
     <Row>
       <Col>
@@ -55,7 +59,9 @@ const Post = ({
             <Col md="11">
               <Row>
                 <Col className="App-post-title">
-                  <span>{title}</span>
+                  <DataConsumer>
+                    {ctx => <span onClick={() => postClick(ctx)}>{title}</span>}
+                  </DataConsumer>
                 </Col>
               </Row>
               <Row>
