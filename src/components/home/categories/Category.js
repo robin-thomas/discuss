@@ -6,7 +6,7 @@ import CategoryUtils from "../../utils/discuss/Category";
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
 
-const Category = () => {
+const Category = props => {
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("");
   const [disableButton, setDisableButton] = useState(true);

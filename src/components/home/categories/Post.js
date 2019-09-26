@@ -5,7 +5,7 @@ import { Modal, Col, Row } from "react-bootstrap";
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
 
-const Post = () => {
+const Post = props => {
   const [show, setShow] = useState(false);
   const [fail, setFail] = useState({
     title: true,

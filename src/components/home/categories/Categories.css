@@ -21,11 +21,11 @@
   color: rgb(255, 255, 255);
 }
 
-.App-categories-category > a {
+.App-categories-category > span {
   transition: all 0.3s;
 }
 
-.App-categories-category:not(.active) > a:hover {
+.App-categories-category:not(.active) > span:hover {
   color: rgb(51, 160, 255) !important;
   background-color: rgb(51, 51, 51);
   background-clip: padding-box;
@@ -52,7 +52,7 @@
   border-left: 3px solid rgb(51, 160, 255);
 }
 
-.App-categories-category > a {
+.App-categories-category > span {
   padding: 10px;
   text-decoration: none;
   display: inline-block;

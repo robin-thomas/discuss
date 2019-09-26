@@ -46,7 +46,13 @@ const Category = {
       };
     };
 
-    return await Arweave.get(lookup, mapper);
+    const response = await Arweave.get(lookup, mapper);
+    return response.map(e => {
+      return {
+        id: e.id,
+        category: JSON.parse(e.name).name
+      };
+    });
   }
 };
 

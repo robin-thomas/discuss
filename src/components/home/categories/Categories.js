@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
 import Post from "./Post";
 import Category from "./Category";
-import { DataConsumer } from "../../utils/DataProvider";
+import CategoryUtils from "../../utils/discuss/Category";
+import { DataContext, DataConsumer } from "../../utils/DataProvider";
 
 import "./Categories.css";
 
 const Categories = props => {
-  const categories = ["all", "hello", "funny", "videos"];
+  const ctx = useContext(DataContext);
+
+  useEffect(() => {
+    CategoryUtils.getAll().then(ctx.setCategories);
+  }, [ctx.categories, ctx.setCategories]);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const onClick = index => {
@@ -35,7 +40,7 @@ const Categories = props => {
         <Row>
           <Col className="App-categories-title text-center">Categories</Col>
         </Row>
-        {categories.map((category, index) => (
+        {ctx.categories.map((e, index) => (
           <Row key={index} style={{ height: "40px" }}>
             <Col
               className={`App-categories-category ${
@@ -43,7 +48,7 @@ const Categories = props => {
               } align-self-center`}
               onClick={() => onClick(index)}
             >
-              <a>{category}</a>
+              <span>{e.category}</span>
             </Col>
           </Row>
         ))}

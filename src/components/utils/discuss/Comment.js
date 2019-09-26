@@ -13,7 +13,7 @@ const Comment = {
     );
   },
 
-  voteComment: async commentId => {
+  voteComment: async (commentId, vote) => {
     return await Arweave.transaction(vote, "Vote", {
       id: commentId,
       lookupType: "Comment"
@@ -100,6 +100,7 @@ const Comment = {
           decode: true,
           number: true
         }),
+        votes,
         transaction
       };
     };
