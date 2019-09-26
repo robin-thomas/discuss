@@ -7,9 +7,17 @@ import Moment from "../../utils/Moment";
 
 import "./Post.css";
 
-const Post = ({
-  post: { votes, comments, categoryId, user, timestamp, title, description }
-}) => {
+const Post = ({ post }) => {
+  const {
+    votes,
+    comments,
+    categoryId,
+    user,
+    timestamp,
+    title,
+    description
+  } = post;
+
   const [blur, setBlur] = useState(votes && votes < 0 ? true : false);
 
   const onClick = e => {
@@ -20,6 +28,7 @@ const Post = ({
 
   const postClick = ctx => {
     ctx.setPage("post");
+    ctx.setPost(post);
   };
 
   return (
@@ -33,7 +42,7 @@ const Post = ({
             <div>
               <DataConsumer>
                 {ctx =>
-                  ctx.address ? (
+                  ctx.address && ctx.address !== user ? (
                     <Row>
                       <Col className="App-post-vote-vote">▲</Col>
                     </Row>
@@ -49,7 +58,7 @@ const Post = ({
               </Row>
               <DataConsumer>
                 {ctx =>
-                  ctx.address ? (
+                  ctx.address && ctx.address !== user ? (
                     <Row>
                       <Col className="App-post-vote-vote">▼</Col>
                     </Row>

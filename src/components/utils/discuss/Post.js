@@ -109,11 +109,22 @@ const Post = {
       );
 
       let categoryId;
+      let timestamp;
       transaction.get("tags").forEach(tag => {
         let key = tag.get("name", { decode: true, string: true });
         let value = tag.get("value", { decode: true, string: true });
-        if (key === "Category") {
-          categoryId = value;
+
+        switch (key) {
+          case "Category":
+            categoryId = value;
+            break;
+
+          case "UnixTime":
+            timestamp = value;
+            break;
+
+          default:
+            break;
         }
       });
 
@@ -126,6 +137,7 @@ const Post = {
         votes,
         comments,
         categoryId,
+        timestamp,
         from,
         transaction
       };
@@ -135,11 +147,14 @@ const Post = {
     return posts.map(e => {
       const json = JSON.parse(e.data);
       return {
+        id: e.id,
         title: json.title,
         description: json.description,
         categoryId: e.categoryId,
         votes: e.votes,
-        comments: e.comments
+        comments: e.comments,
+        user: e.from,
+        timestamp: e.timestamp
       };
     });
   }

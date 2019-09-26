@@ -11,6 +11,7 @@ const DataProvider = props => {
 
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState({});
 
   return (
     <DataContext.Provider
@@ -28,7 +29,9 @@ const DataProvider = props => {
         categories,
         setCategories,
         posts,
-        setPosts
+        setPosts,
+        post,
+        setPost
       }}
     >
       {props.children}

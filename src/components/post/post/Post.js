@@ -1,24 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
 import Comment from "../Comment";
 
 import Moment from "../../utils/Moment";
-import { DataConsumer } from "../../utils/DataProvider";
+import { DataConsumer, DataContext } from "../../utils/DataProvider";
 
 import "./Post.css";
 
 const Post = props => {
-  const post = {
-    title: "Amazing clone",
-    votes: 12,
-    content: "Discuss is a full stack clone of reddit",
-    comments: 1,
-    category: "programming",
-    user: "john",
-    timestamp: 1569298544
-  };
+  const ctx = useContext(DataContext);
 
   return (
     <div className="App-post">
@@ -27,7 +19,7 @@ const Post = props => {
           <div>
             <DataConsumer>
               {ctx =>
-                ctx.address ? (
+                ctx.address && ctx.address !== ctx.post.user ? (
                   <Row>
                     <Col className="App-post-vote-vote">▲</Col>
                   </Row>
@@ -39,11 +31,11 @@ const Post = props => {
               }
             </DataConsumer>
             <Row>
-              <Col className="App-post-vote-count">{post.votes}</Col>
+              <Col className="App-post-vote-count">{ctx.post.votes.length}</Col>
             </Row>
             <DataConsumer>
               {ctx =>
-                ctx.address ? (
+                ctx.address && ctx.address !== ctx.post.user ? (
                   <Row>
                     <Col className="App-post-vote-vote">▼</Col>
                   </Row>
@@ -55,27 +47,34 @@ const Post = props => {
         <Col>
           <Row>
             <Col className="App-post-title">
-              <span>{post.title}</span>
+              <span>{ctx.post.title}</span>
             </Col>
           </Row>
           <Row>
-            <Col className="App-post-content">{post.content}</Col>
+            <Col className="App-post-content">{ctx.post.description}</Col>
           </Row>
           <Row>
             <Col>
               <span className="App-post-details App-post-comment">
-                {post.comments} comments
+                {ctx.post.comments.length} comments
               </span>
               <span className="App-post-details App-post-category">
-                /d/{post.category}
+                /d/
+                {
+                  ctx.categories
+                    .filter(e => e.id === ctx.post.categoryId)
+                    .map(e => e.category)[0]
+                }
               </span>
               <span className="App-post-details">by</span>
               <span className="App-post-details App-post-user">
-                {post.user}
+                {ctx.post.user}
               </span>
               <span className="App-post-details">
-                {post.timestamp
-                  ? Moment(post.timestamp * 1000 /* milliseconds */).fromNow()
+                {ctx.post.timestamp
+                  ? Moment(
+                      ctx.post.timestamp * 1000 /* milliseconds */
+                    ).fromNow()
                   : ""}
               </span>
             </Col>

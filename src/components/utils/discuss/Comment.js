@@ -93,19 +93,52 @@ const Comment = {
         transaction.get("owner")
       );
 
+      let postId;
+      let timestamp;
+      transaction.get("tags").forEach(tag => {
+        let key = tag.get("name", { decode: true, string: true });
+        let value = tag.get("value", { decode: true, string: true });
+
+        switch (key) {
+          case "Post":
+            postId = value;
+            break;
+
+          case "UnixTime":
+            timestamp = value;
+            break;
+
+          default:
+            break;
+        }
+      });
+
       return {
         id: transaction.get("id"),
         from,
-        comment: transaction.get("data", {
+        data: transaction.get("data", {
           decode: true,
-          number: true
+          string: true
         }),
         votes,
+        postId,
+        timestamp,
         transaction
       };
     };
 
-    return await Arweave.get(lookup, mapper);
+    let comments = await Arweave.get(lookup, mapper);
+    return comments.map(e => {
+      const json = JSON.parse(e.data);
+      return {
+        id: e.id,
+        comment: json.comment,
+        postId: e.postId,
+        votes: e.votes,
+        user: e.from,
+        timestamp: e.timestamp
+      };
+    });
   }
 };
 
