@@ -107,6 +107,7 @@ const Post = {
           string: true
         }),
         votes,
+        comments,
         from,
         transaction
       };

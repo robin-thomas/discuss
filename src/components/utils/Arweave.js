@@ -23,10 +23,10 @@ const Arweave = {
     return await Arweave.getClient().wallets.jwkToAddress(wallet);
   },
 
-  transaction: async (data, type, { id, lookupType }) => {
-    const transaction = await Arweave.arweave.createTransaction(
+  transaction: async (data, type, lookup) => {
+    let transaction = await Arweave.arweave.createTransaction(
       {
-        data: data
+        data: JSON.stringify(data)
       },
       Arweave.wallet
     );
@@ -36,34 +36,26 @@ const Arweave = {
     transaction.addTag("UnixTime", Math.round(new Date().getTime() / 1000));
     transaction.addTag("Type", type);
 
+    lookup = lookup || {};
+    const { id, lookupType } = lookup;
+
     if (lookupType !== undefined && id !== undefined) {
       transaction.addTag(lookupType, id);
     }
 
     await Arweave.getClient().transactions.sign(transaction, Arweave.wallet);
-    return await Arweave.getClient().transactions.post(transaction);
+    const response = await Arweave.getClient().transactions.post(transaction);
+
+    if (response.status === 400 || response.status === 500) {
+      throw new Error("Transaction failed");
+    }
+
+    return transaction.id;
   },
 
   get: async (lookup, mapper) => {
     const txnIds = await Arweave.getClient().arql(lookup);
     return await Promise.all(txnIds.map(mapper));
-  },
-
-  createPost: async post => {
-    const transaction = await Arweave.getClient().createTransaction(
-      {
-        data: post
-      },
-      Arweave.wallet
-    );
-
-    transaction.addTag("AppName", config.app.name);
-    transaction.addTag("AppVersion", config.app.version);
-    transaction.addTag("UnixTime", Math.round(new Date().getTime() / 1000));
-    transaction.addTag("Type", "Post");
-
-    await Arweave.getClient().transactions.sign(transaction, Arweave.wallet);
-    return await Arweave.getClient().transactions.post(transaction);
   }
 };
 

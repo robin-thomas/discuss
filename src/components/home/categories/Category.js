@@ -2,15 +2,18 @@ import React, { useState } from "react";
 
 import { Modal, Col, Row } from "react-bootstrap";
 
+import CategoryUtils from "../../utils/discuss/Category";
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
 
 const Category = () => {
   const [show, setShow] = useState(false);
+  const [category, setCategory] = useState("");
   const [disableButton, setDisableButton] = useState(true);
 
   const onSubmit = async () => {
     // TODO: create a new category.
+    console.log(await CategoryUtils.createCategory(category));
 
     setShow(false);
 
@@ -36,8 +39,10 @@ const Category = () => {
               <Input
                 placeholder="Category name"
                 validate={text => {
-                  const validate = /^([a-zA-Z_-]+)$/.test(text);
+                  const validate =
+                    /^([a-zA-Z_-]+)$/.test(text) && text !== "all";
                   setDisableButton(!validate);
+                  setCategory(text);
                   return { validate };
                 }}
               />
