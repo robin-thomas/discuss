@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-import { Modal, Col, Row } from "react-bootstrap";
+import { Modal, Col, Row, Form } from "react-bootstrap";
 
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
+import { DataConsumer } from "../../utils/DataProvider";
 
 const Post = props => {
   const [show, setShow] = useState(false);
@@ -46,6 +47,17 @@ const Post = props => {
                   return { validate };
                 }}
               />
+            </Col>
+            <Col md="5">
+              <DataConsumer>
+                {ctx => (
+                  <Form.Control as="select" size="sm">
+                    {ctx.categories.map((e, index) => (
+                      <option key={index}>{e.category}</option>
+                    ))}
+                  </Form.Control>
+                )}
+              </DataConsumer>
             </Col>
           </Row>
           <Row>
