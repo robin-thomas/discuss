@@ -17,7 +17,7 @@ const Categories = props => {
   };
 
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div>
       <DataConsumer>
         {ctx =>
           ctx.address ? (

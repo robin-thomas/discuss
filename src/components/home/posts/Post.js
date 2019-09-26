@@ -13,7 +13,7 @@ const Post = ({
   const [blur, setBlur] = useState(votes && votes < 0 ? true : false);
 
   const onClick = e => {
-    if (e.target.classList.contains("App-post-blur")) {
+    if (e.target.classList.contains("App-posts-post-blur")) {
       setBlur(false);
     }
   };
@@ -24,69 +24,72 @@ const Post = ({
 
   return (
     <Row>
-      <Col>
-        <div className="App-post">
-          <Row className={`${blur ? "App-post-blur" : ""}`} onClick={onClick}>
-            <Col md="auto" className="App-post-vote text-center pr-0">
-              <div>
+      <Col className="App-posts-post">
+        <Row
+          className={`${blur ? "App-posts-post-blur" : ""}`}
+          onClick={onClick}
+        >
+          <Col md="auto" className="App-posts-post-vote text-center px-0">
+            <div>
+              <DataConsumer>
+                {ctx =>
+                  ctx.address ? (
+                    <Row>
+                      <Col className="App-post-vote-vote">▲</Col>
+                    </Row>
+                  ) : (
+                    <Row>
+                      <Col>&nbsp;</Col>
+                    </Row>
+                  )
+                }
+              </DataConsumer>
+              <Row>
+                <Col className="App-post-vote-count">{votes}</Col>
+              </Row>
+              <DataConsumer>
+                {ctx =>
+                  ctx.address ? (
+                    <Row>
+                      <Col className="App-post-vote-vote">▼</Col>
+                    </Row>
+                  ) : null
+                }
+              </DataConsumer>
+            </div>
+          </Col>
+          <Col className="App-posts-post-content">
+            <Row>
+              <Col className="App-posts-post-title">
                 <DataConsumer>
-                  {ctx =>
-                    ctx.address ? (
-                      <Row>
-                        <Col className="App-post-vote-vote">▲</Col>
-                      </Row>
-                    ) : (
-                      <Row>
-                        <Col>&nbsp;</Col>
-                      </Row>
-                    )
-                  }
+                  {ctx => <span onClick={() => postClick(ctx)}>{title}</span>}
                 </DataConsumer>
-                <Row>
-                  <Col className="App-post-vote-count">{votes}</Col>
-                </Row>
-                <DataConsumer>
-                  {ctx =>
-                    ctx.address ? (
-                      <Row>
-                        <Col className="App-post-vote-vote">▼</Col>
-                      </Row>
-                    ) : null
-                  }
-                </DataConsumer>
-              </div>
-            </Col>
-            <Col>
-              <Row>
-                <Col className="App-post-title">
-                  <DataConsumer>
-                    {ctx => <span onClick={() => postClick(ctx)}>{title}</span>}
-                  </DataConsumer>
-                </Col>
-              </Row>
-              <Row>
-                <Col className="App-post-content">{content}</Col>
-              </Row>
-              <Row>
-                <Col>
-                  <span className="App-post-details App-post-comment">
-                    {comments} comments
-                  </span>
-                  <span className="App-post-details App-post-category">
-                    /d/{category}
-                  </span>
-                  <span className="App-post-details">by</span>
-                  <span className="App-post-details App-post-user">{user}</span>
-                  <span className="App-post-details">
-                    {timestamp
-                      ? Moment(timestamp * 1000 /* milliseconds */).fromNow()
-                      : ""}
-                  </span>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="App-posts-post-desc">{content}</Col>
+            </Row>
+            <Row>
+              <Col>
+                <span className="App-posts-post-details App-posts-post-comment">
+                  {comments} comments
+                </span>
+                <span className="App-posts-post-details App-posts-post-category">
+                  /d/{category}
+                </span>
+                <span className="App-posts-post-details">by</span>
+                <span className="App-posts-post-details App-posts-post-user">
+                  {user}
+                </span>
+                <span className="App-posts-post-details">
+                  {timestamp
+                    ? Moment(timestamp * 1000 /* milliseconds */).fromNow()
+                    : ""}
+                </span>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </Col>
     </Row>
   );

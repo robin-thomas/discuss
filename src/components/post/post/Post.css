@@ -1,8 +1,88 @@
 .App-post {
   color: white;
-  background-color: rgb(26, 26, 27);
-  /* border: 1px solid rgb(52, 53, 54); */
+  background-color: rgb(38, 38, 38);
+  border-bottom: 1px solid rgb(51, 51, 51);
   border-radius: 4px;
   overflow: hidden;
   padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px;
 }
+
+.App-post-vote {
+  /* border-right: 1px solid rgb(52, 53, 54); */
+  /* background: rgb(24, 24, 27); */
+}
+
+.App-post-vote > div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.App-vote-count {
+  font-size: 13px;
+  line-height: 25px;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+}
+
+.App-post-vote-vote {
+  cursor: pointer;
+}
+
+.App-post-vote-vote:hover {
+  color: rgb(51, 160, 255);
+}
+
+.App-post-title > span {
+  color: rgb(255, 255, 255);
+  transition: color 0.1s ease 0s;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.App-post-title > span:hover {
+  color: rgb(51, 160, 255);
+  text-decoration: underline;
+}
+
+.App-post-content {
+  font-size: 13px;
+  line-height: 19px;
+  color: rgb(176, 184, 191);
+}
+
+.App-post-details {
+  font-size: 13px;
+  margin-right: 4px;
+  color: rgb(176, 184, 191);
+}
+
+.App-post-comment {
+  color: rgb(255, 255, 255) !important;
+  text-decoration: none;
+  /* cursor: pointer; */
+}
+
+/* .App-post-comment:hover {
+  color: rgb(51, 160, 255) !important;
+  text-decoration: underline;
+} */
+
+.App-post-category,
+.App-post-user {
+  color: rgb(51, 160, 255) !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.App-post-category:hover,
+.App-post-user:hover {
+  text-decoration: underline;
+}
+
+/* .App-post-comment:before {
+  content: "\F10C";
+  font-family: redesignFont;
+} */

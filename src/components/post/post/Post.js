@@ -83,11 +83,18 @@ const Post = props => {
           <Row>
             <Col>&nbsp;</Col>
           </Row>
-          <Row>
-            <Col>
-              <Comment />
-            </Col>
-          </Row>
+
+          <DataConsumer>
+            {ctx =>
+              ctx.address ? (
+                <Row>
+                  <Col>
+                    <Comment />
+                  </Col>
+                </Row>
+              ) : null
+            }
+          </DataConsumer>
         </Col>
       </Row>
     </div>

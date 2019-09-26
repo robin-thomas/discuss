@@ -21,7 +21,10 @@ const Comment = props => {
               marginBottom: "3px"
             }}
           >
-            Comment as robin
+            Comment as&nbsp;
+            <span className="App-post-details App-post-comment-user">
+              robin
+            </span>
           </p>
         </Col>
       </Row>
