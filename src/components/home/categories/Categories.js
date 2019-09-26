@@ -13,7 +13,11 @@ const Categories = props => {
   const ctx = useContext(DataContext);
 
   useEffect(() => {
-    CategoryUtils.getAll().then(ctx.setCategories);
+    let id = setInterval(
+      () => CategoryUtils.getAll().then(ctx.setCategories),
+      1000
+    );
+    return () => clearInterval(id);
   }, [ctx.categories, ctx.setCategories]);
 
   const [activeIndex, setActiveIndex] = useState(0);

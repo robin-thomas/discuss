@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Modal, Col, Row, Form } from "react-bootstrap";
 
+import PostUtils from "../../utils/discuss/Post";
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
 import { DataConsumer } from "../../utils/DataProvider";
@@ -12,13 +13,32 @@ const Post = props => {
     title: true,
     content: true
   });
+  const [post, setPost] = useState({
+    title: null,
+    description: null,
+    category: null
+  });
 
-  const onSubmit = async e => {
-    // TODO: create a new category.
+  const onSubmit = async (e, ctx) => {
+    // create a new post.
+    let categoryId = ctx.categories
+      .filter(e => e.category === post.category)
+      .map(e => e.id)[0];
+    if (categoryId === undefined) {
+      categoryId = ctx.categories[0].id;
+    }
+
+    console.log(
+      await PostUtils.createPost(
+        {
+          title: post.title,
+          description: post.description
+        },
+        categoryId
+      )
+    );
 
     setShow(false);
-
-    // TODO: trigger reload of categories view.
   };
 
   return (
@@ -44,6 +64,7 @@ const Post = props => {
                   setFail(fail => {
                     return { ...fail, title: !validate };
                   });
+                  setPost({ ...post, title: text });
                   return { validate };
                 }}
               />
@@ -51,7 +72,13 @@ const Post = props => {
             <Col md="5">
               <DataConsumer>
                 {ctx => (
-                  <Form.Control as="select" size="sm">
+                  <Form.Control
+                    as="select"
+                    size="sm"
+                    onChange={e =>
+                      setPost({ ...post, category: e.target.value })
+                    }
+                  >
                     {ctx.categories.map((e, index) => (
                       <option key={index}>{e.category}</option>
                     ))}
@@ -76,6 +103,7 @@ const Post = props => {
                   setFail(fail => {
                     return { ...fail, content: !validate };
                   });
+                  setPost({ ...post, description: text });
                   return { validate };
                 }}
               />
@@ -86,12 +114,16 @@ const Post = props => {
           </Row>
           <Row>
             <Col>
-              <SpinnerButton
-                variant="outline-dark"
-                text="Create"
-                onClick={onSubmit}
-                disable={fail.title || fail.content}
-              />
+              <DataConsumer>
+                {ctx => (
+                  <SpinnerButton
+                    variant="outline-dark"
+                    text="Create"
+                    onClick={e => onSubmit(e, ctx)}
+                    disable={fail.title || fail.content}
+                  />
+                )}
+              </DataConsumer>
             </Col>
           </Row>
           <br />

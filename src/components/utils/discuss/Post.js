@@ -1,4 +1,5 @@
-import Arweave from "../Arweave.js";
+import Comment from "./Comment";
+import Arweave from "../Arweave";
 
 import * as config from "../../../config.json";
 
@@ -69,7 +70,7 @@ const Post = {
   },
 
   getPosts: async categoryId => {
-    const lookup = {
+    let lookup = {
       op: "and",
       expr1: {
         op: "equals",
@@ -90,6 +91,13 @@ const Post = {
         }
       }
     };
+    if (categoryId === undefined) {
+      lookup.expr2 = {
+        op: "equals",
+        expr1: "Type",
+        expr2: "Post"
+      };
+    }
 
     const mapper = async postId => {
       const votes = await Post.getVotes(postId);
@@ -100,20 +108,40 @@ const Post = {
         transaction.get("owner")
       );
 
+      let categoryId;
+      transaction.get("tags").forEach(tag => {
+        let key = tag.get("name", { decode: true, string: true });
+        let value = tag.get("value", { decode: true, string: true });
+        if (key === "Category") {
+          categoryId = value;
+        }
+      });
+
       return {
         id: transaction.get("id"),
-        title: transaction.get("data", {
+        data: transaction.get("data", {
           decode: true,
           string: true
         }),
         votes,
         comments,
+        categoryId,
         from,
         transaction
       };
     };
 
-    return await Arweave.get(lookup, mapper);
+    let posts = await Arweave.get(lookup, mapper);
+    return posts.map(e => {
+      const json = JSON.parse(e.data);
+      return {
+        title: json.title,
+        description: json.description,
+        categoryId: e.categoryId,
+        votes: e.votes,
+        comments: e.comments
+      };
+    });
   }
 };
 

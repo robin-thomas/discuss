@@ -8,7 +8,7 @@ import Moment from "../../utils/Moment";
 import "./Post.css";
 
 const Post = ({
-  post: { votes, comments, category, user, timestamp, title, content }
+  post: { votes, comments, categoryId, user, timestamp, title, description }
 }) => {
   const [blur, setBlur] = useState(votes && votes < 0 ? true : false);
 
@@ -45,7 +45,7 @@ const Post = ({
                 }
               </DataConsumer>
               <Row>
-                <Col className="App-post-vote-count">{votes}</Col>
+                <Col className="App-post-vote-count">{votes.length}</Col>
               </Row>
               <DataConsumer>
                 {ctx =>
@@ -67,16 +67,25 @@ const Post = ({
               </Col>
             </Row>
             <Row>
-              <Col className="App-posts-post-desc">{content}</Col>
+              <Col className="App-posts-post-desc">{description}</Col>
             </Row>
             <Row>
               <Col>
                 <span className="App-posts-post-details App-posts-post-comment">
-                  {comments} comments
+                  {comments.length} comments
                 </span>
-                <span className="App-posts-post-details App-posts-post-category">
-                  /d/{category}
-                </span>
+                <DataConsumer>
+                  {ctx => (
+                    <span className="App-posts-post-details App-posts-post-category">
+                      /d/
+                      {
+                        ctx.categories
+                          .filter(e => e.id === categoryId)
+                          .map(e => e.category)[0]
+                      }
+                    </span>
+                  )}
+                </DataConsumer>
                 <span className="App-posts-post-details">by</span>
                 <span className="App-posts-post-details App-posts-post-user">
                   {user}

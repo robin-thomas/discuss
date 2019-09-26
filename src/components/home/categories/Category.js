@@ -12,12 +12,10 @@ const Category = props => {
   const [disableButton, setDisableButton] = useState(true);
 
   const onSubmit = async () => {
-    // TODO: create a new category.
+    // create a new category.
     console.log(await CategoryUtils.createCategory(category));
 
     setShow(false);
-
-    // TODO: trigger reload of categories view.
   };
 
   return (
