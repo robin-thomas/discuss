@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
-import { Upvote, Downvote } from "../../utils/Vote";
+import { Upvote, Downvote, voteCount } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
 import { DataConsumer } from "../../utils/DataProvider";
 import Moment from "../../utils/Moment";
@@ -63,7 +63,7 @@ const Post = ({ post }) => {
                 )}
               </DataConsumer>
               <Row>
-                <Col className="App-post-vote-count">{votes.length}</Col>
+                <Col className="App-post-vote-count">{voteCount(votes)}</Col>
               </Row>
               <DataConsumer>
                 {ctx => (

@@ -14,6 +14,10 @@ const hasDownvoted = (ctx, votes) => {
   return votes.filter(e => e.user === ctx.address && e.vote === -1).length > 0;
 };
 
+const voteCount = votes => {
+  return votes.map(e => e.vote).reduce((prev, curr) => prev + curr);
+};
+
 const Upvote = ({ ctx, votes, user, onClick }) => {
   return ctx.address && hasVoted(ctx, votes) && hasUpvoted(ctx, votes) ? (
     <Row>
@@ -58,5 +62,6 @@ const Downvote = ({ ctx, votes, user, onClick }) => {
   );
 };
 
+export { voteCount };
 export { Upvote };
 export { Downvote };
