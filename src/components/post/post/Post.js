@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 
 import Comment from "../Comment";
+import Comments from "../comments";
 
 import Moment from "../../utils/Moment";
 import { DataConsumer, DataContext } from "../../utils/DataProvider";
@@ -82,7 +83,6 @@ const Post = props => {
           <Row>
             <Col>&nbsp;</Col>
           </Row>
-
           <DataConsumer>
             {ctx =>
               ctx.address ? (
@@ -94,6 +94,8 @@ const Post = props => {
               ) : null
             }
           </DataConsumer>
+          <hr />
+          <Comments />
         </Col>
       </Row>
     </div>

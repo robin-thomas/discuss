@@ -33,3 +33,10 @@ code {
   line-height: 18px;
   margin-bottom: 0 !important;
 }
+
+hr {
+  /* margin-top: 1rem;
+  margin-bottom: 1rem; */
+  border: 0;
+  border-top: 1px solid rgb(52, 53, 54) !important;
+}
