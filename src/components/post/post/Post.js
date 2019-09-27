@@ -71,6 +71,7 @@ const Post = props => {
               <span className="App-post-details App-post-user">
                 {ctx.post.user}
               </span>
+              <span className="App-post-details">&nbsp;·&nbsp;</span>
               <span className="App-post-details">
                 {ctx.post.timestamp
                   ? Moment(
