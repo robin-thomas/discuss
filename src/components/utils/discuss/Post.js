@@ -19,7 +19,13 @@ const Post = {
     // TODO
   },
 
-  votePost: async (postId, vote) => {
+  votePost: async (postId, vote, user) => {
+    // TODO:
+    // if vote = 1, send 0.10 AR to the user who made the post.
+    // if vote = -1, send 0.10 AR to the miners.
+    // await Arweave.transfer(user, '0.01');
+    console.log(user, postId);
+
     return await Arweave.transaction(vote, "Vote", {
       id: postId,
       lookupType: "Post"
@@ -55,18 +61,43 @@ const Post = {
         transaction.get("owner")
       );
 
+      let timestamp;
+      transaction.get("tags").forEach(tag => {
+        let key = tag.get("name", { decode: true, string: true });
+        let value = tag.get("value", { decode: true, string: true });
+
+        switch (key) {
+          case "UnixTime":
+            timestamp = value;
+            break;
+
+          default:
+            break;
+        }
+      });
+
       return {
         id: transaction.get("id"),
         from,
-        vote: transaction.get("data", {
+        data: transaction.get("data", {
           decode: true,
-          number: true
+          string: true
         }),
+        timestamp,
         transaction
       };
     };
 
-    return await Arweave.get(lookup, mapper);
+    let comments = await Arweave.get(lookup, mapper);
+    return comments.map(e => {
+      return {
+        commentId: e.id,
+        postId: postId,
+        user: e.from,
+        vote: parseInt(e.data),
+        timestamp: e.timestamp
+      };
+    });
   },
 
   getPosts: async categoryId => {
@@ -147,7 +178,7 @@ const Post = {
     return posts.map(e => {
       const json = JSON.parse(e.data);
       return {
-        id: e.id,
+        postId: e.id,
         title: json.title,
         description: json.description,
         categoryId: e.categoryId,

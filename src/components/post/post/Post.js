@@ -1,3 +1,6 @@
+/*global confirm*/
+/*eslint no-restricted-globals: ["off", "confirm"]*/
+
 import React, { useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
@@ -7,11 +10,21 @@ import Comments from "../comments";
 
 import Moment from "../../utils/Moment";
 import { DataConsumer, DataContext } from "../../utils/DataProvider";
+import { Upvote, Downvote } from "../../utils/Vote";
+import PostUtils from "../../utils/discuss/Post";
 
 import "./Post.css";
 
 const Post = props => {
   const ctx = useContext(DataContext);
+
+  const vote = async (ctx, vote) => {
+    if (confirm("Are you sure you want to vote for this post?")) {
+      console.log(
+        await PostUtils.votePost(ctx.post.postId, vote, ctx.post.user)
+      );
+    }
+  };
 
   return (
     <div className="App-post">
@@ -19,29 +32,27 @@ const Post = props => {
         <Col md="auto" className="App-post-vote text-center pr-0">
           <div>
             <DataConsumer>
-              {ctx =>
-                ctx.address && ctx.address !== ctx.post.user ? (
-                  <Row>
-                    <Col className="App-post-vote-vote">▲</Col>
-                  </Row>
-                ) : (
-                  <Row>
-                    <Col>&nbsp;</Col>
-                  </Row>
-                )
-              }
+              {ctx => (
+                <Upvote
+                  ctx={ctx}
+                  votes={ctx.post.votes}
+                  user={ctx.post.user}
+                  onClick={() => vote(ctx, 1)}
+                />
+              )}
             </DataConsumer>
             <Row>
               <Col className="App-post-vote-count">{ctx.post.votes.length}</Col>
             </Row>
             <DataConsumer>
-              {ctx =>
-                ctx.address && ctx.address !== ctx.post.user ? (
-                  <Row>
-                    <Col className="App-post-vote-vote">▼</Col>
-                  </Row>
-                ) : null
-              }
+              {ctx => (
+                <Downvote
+                  ctx={ctx}
+                  votes={ctx.post.votes}
+                  user={ctx.post.user}
+                  onClick={() => vote(ctx, -1)}
+                />
+              )}
             </DataConsumer>
           </div>
         </Col>
@@ -59,6 +70,7 @@ const Post = props => {
               <span className="App-post-details App-post-comment">
                 {ctx.post.comments.length} comments
               </span>
+              <span className="App-post-details">&nbsp;·&nbsp;</span>
               <span className="App-post-details App-post-category">
                 /d/
                 {

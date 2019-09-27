@@ -1,7 +1,12 @@
+/*global confirm*/
+/*eslint no-restricted-globals: ["off", "confirm"]*/
+
 import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import { Upvote, Downvote } from "../../utils/Vote";
+import PostUtils from "../../utils/discuss/Post";
 import { DataConsumer } from "../../utils/DataProvider";
 import Moment from "../../utils/Moment";
 
@@ -9,6 +14,7 @@ import "./Post.css";
 
 const Post = ({ post }) => {
   const {
+    postId,
     votes,
     comments,
     categoryId,
@@ -31,6 +37,12 @@ const Post = ({ post }) => {
     ctx.setPost(post);
   };
 
+  const vote = async (ctx, vote) => {
+    if (confirm("Are you sure you want to vote for this post?")) {
+      console.log(await PostUtils.votePost(postId, vote, user));
+    }
+  };
+
   return (
     <Row>
       <Col className="App-posts-post">
@@ -41,29 +53,27 @@ const Post = ({ post }) => {
           <Col md="auto" className="App-posts-post-vote text-center px-0">
             <div>
               <DataConsumer>
-                {ctx =>
-                  ctx.address && ctx.address !== user ? (
-                    <Row>
-                      <Col className="App-post-vote-vote">▲</Col>
-                    </Row>
-                  ) : (
-                    <Row>
-                      <Col>&nbsp;</Col>
-                    </Row>
-                  )
-                }
+                {ctx => (
+                  <Upvote
+                    ctx={ctx}
+                    votes={votes}
+                    user={user}
+                    onClick={() => vote(ctx, 1)}
+                  />
+                )}
               </DataConsumer>
               <Row>
                 <Col className="App-post-vote-count">{votes.length}</Col>
               </Row>
               <DataConsumer>
-                {ctx =>
-                  ctx.address && ctx.address !== user ? (
-                    <Row>
-                      <Col className="App-post-vote-vote">▼</Col>
-                    </Row>
-                  ) : null
-                }
+                {ctx => (
+                  <Downvote
+                    ctx={ctx}
+                    votes={votes}
+                    user={user}
+                    onClick={() => vote(ctx, -1)}
+                  />
+                )}
               </DataConsumer>
             </div>
           </Col>
@@ -83,6 +93,7 @@ const Post = ({ post }) => {
                 <span className="App-posts-post-details App-posts-post-comment">
                   {comments.length} comments
                 </span>
+                <span className="App-post-details">&nbsp;·&nbsp;</span>
                 <DataConsumer>
                   {ctx => (
                     <span className="App-posts-post-details App-posts-post-category">
@@ -99,6 +110,7 @@ const Post = ({ post }) => {
                 <span className="App-posts-post-details App-posts-post-user">
                   {user}
                 </span>
+                <span className="App-post-details">&nbsp;·&nbsp;</span>
                 <span className="App-posts-post-details">
                   {timestamp
                     ? Moment(timestamp * 1000 /* milliseconds */).fromNow()

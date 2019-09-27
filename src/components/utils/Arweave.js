@@ -23,8 +23,31 @@ const Arweave = {
     return await Arweave.getClient().wallets.jwkToAddress(wallet);
   },
 
+  status: async txnId => {
+    return await Arweave.getClient().transactions.getStatus(txnId);
+  },
+
+  transfer: async (to, amount) => {
+    let transaction = await Arweave.getClient().createTransaction(
+      {
+        target: to,
+        quantity: Arweave.getClient().ar.arToWinston(amount)
+      },
+      Arweave.wallet
+    );
+
+    await Arweave.getClient().transactions.sign(transaction, Arweave.wallet);
+    const response = await Arweave.getClient().transactions.post(transaction);
+
+    if (response.status === 400 || response.status === 500) {
+      throw new Error("Transaction failed");
+    }
+
+    return transaction.id;
+  },
+
   transaction: async (data, type, lookup) => {
-    let transaction = await Arweave.arweave.createTransaction(
+    let transaction = await Arweave.getClient().createTransaction(
       {
         data: JSON.stringify(data)
       },

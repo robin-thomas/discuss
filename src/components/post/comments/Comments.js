@@ -13,7 +13,7 @@ const Comments = props => {
       {ctx =>
         ctx.post.comments.map((e, index) => (
           <Row key={index}>
-            <Col md="auto">
+            <Col md="auto" className="pr-0">
               <DataConsumer>
                 {ctx =>
                   ctx.address && ctx.address !== e.user ? (

@@ -52,6 +52,10 @@
   background: rgb(24, 24, 27);
 }
 
+.App-post-vote-voted {
+  color: rgb(51, 160, 255);
+}
+
 .App-posts-post-vote > div {
   padding-left: 10px;
   padding-right: 10px;
