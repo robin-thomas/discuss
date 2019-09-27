@@ -72,15 +72,41 @@ const Header = props => {
               {ctx => <span onClick={() => home(ctx)}>{config.app.name}</span>}
             </DataConsumer>
           </Col>
-          <Col md="auto" className="ml-auto align-self-center">
+          <DataConsumer>
+            {ctx =>
+              ctx.address !== null ? (
+                <Col
+                  md="auto"
+                  className="ml-auto align-self-center App-posts-post-desc"
+                >
+                  <span className="App-header-address">{ctx.address}</span>
+                </Col>
+              ) : (
+                <Col md="auto" className="ml-auto">
+                  &nbsp;
+                </Col>
+              )
+            }
+          </DataConsumer>
+          <Col md="auto" className="align-self-center">
             <DataConsumer>
-              {ctx => (
-                <a className="App-header-link" onClick={() => onClick(ctx)}>
-                  {ctx.address === null
-                    ? "Log In"
-                    : `${ctx.address.substr(0, 15)}...`}
-                </a>
-              )}
+              {ctx =>
+                ctx.address === null ? (
+                  <span
+                    className="App-header-link"
+                    onClick={() => onClick(ctx)}
+                  >
+                    Log In
+                  </span>
+                ) : (
+                  <span
+                    className="App-header-link"
+                    onClick={() => onClick(ctx)}
+                  >
+                    Log Out
+                  </span>
+                )
+              }
             </DataConsumer>
           </Col>
         </Row>

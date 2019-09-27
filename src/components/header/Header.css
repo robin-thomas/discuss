@@ -18,15 +18,19 @@
   cursor: pointer;
 }
 
+.App-header-address,
 .App-header-link {
-  text-transform: uppercase;
   text-decoration: none;
   color: rgb(176, 184, 191) !important;
   transition: all 0.3s;
-  font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.05em;
+}
+
+.App-header-link {
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .App-header-link:hover {
