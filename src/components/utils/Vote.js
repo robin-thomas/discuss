@@ -15,6 +15,9 @@ const hasDownvoted = (ctx, votes) => {
 };
 
 const voteCount = votes => {
+  if (votes.length === 0) {
+    return 0;
+  }
   return votes.map(e => e.vote).reduce((prev, curr) => prev + curr);
 };
 
