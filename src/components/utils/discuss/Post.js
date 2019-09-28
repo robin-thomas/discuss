@@ -15,8 +15,16 @@ const Post = {
     );
   },
 
-  editPost: ({ title, description }, categoryId, postId) => {
-    // TODO
+  editPost: async ({ title, description }, categoryId, postId) => {
+    return await Arweave.transaction(
+      {
+        title,
+        description,
+        postId
+      },
+      "Post",
+      { id: categoryId, lookupType: "Category" }
+    );
   },
 
   votePost: async (postId, vote, user) => {
@@ -175,10 +183,10 @@ const Post = {
     };
 
     let posts = await Arweave.get(lookup, mapper);
-    return posts.map(e => {
+    posts = posts.map(e => {
       const json = JSON.parse(e.data);
       return {
-        postId: e.id,
+        postId: json.postId ? json.postId : e.id,
         title: json.title,
         description: json.description,
         categoryId: e.categoryId,
@@ -188,6 +196,37 @@ const Post = {
         timestamp: e.timestamp
       };
     });
+
+    // reduce it to include revisions (title, description, categoryId, timestamp).
+    posts = posts.reduce(
+      (p, e /* current value in the iteration */) => {
+        p[e.postId] = {
+          postId: e.postId,
+          votes: e.votes,
+          comments: e.comments,
+          user: e.user
+        };
+
+        if (e.postId in p) {
+          p[e.postId].revisions = [];
+        }
+        p[e.postId].revisions.push({
+          title: e.title,
+          description: e.description,
+          categoryId: e.categoryId,
+          timestamp: e.timestamp
+        });
+
+        return p;
+      },
+      {} /* initial value of p */
+    );
+    posts = Object.keys(posts).reduce((p, key) => {
+      p.push(posts[key]);
+      return p;
+    }, []);
+
+    return posts;
   }
 };
 

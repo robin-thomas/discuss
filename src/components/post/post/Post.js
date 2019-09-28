@@ -60,11 +60,13 @@ const Post = props => {
         <Col>
           <Row>
             <Col className="App-post-title">
-              <span>{ctx.post.title}</span>
+              <span>{ctx.post.revisions[0].title}</span>
             </Col>
           </Row>
           <Row>
-            <Col className="App-post-content">{ctx.post.description}</Col>
+            <Col className="App-post-content">
+              {ctx.post.revisions[0].description}
+            </Col>
           </Row>
           <Row>
             <Col>
@@ -76,7 +78,7 @@ const Post = props => {
                 /d/
                 {
                   ctx.categories
-                    .filter(e => e.id === ctx.post.categoryId)
+                    .filter(e => e.id === ctx.post.revisions[0].categoryId)
                     .map(e => e.category)[0]
                 }
               </span>
@@ -86,7 +88,7 @@ const Post = props => {
               </span>
               <span className="App-post-details">&nbsp;·&nbsp;</span>
               <span className="App-post-details">
-                {fromNow(ctx.post.timestamp)}
+                {fromNow(ctx.post.revisions[0].timestamp)}
               </span>
             </Col>
           </Row>

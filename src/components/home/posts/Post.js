@@ -14,16 +14,7 @@ import { selectCategory } from "../categories/Categories";
 import "./Post.css";
 
 const Post = ({ post }) => {
-  const {
-    postId,
-    votes,
-    comments,
-    categoryId,
-    user,
-    timestamp,
-    title,
-    description
-  } = post;
+  const { postId, revisions, votes, comments, user } = post;
 
   const [blur, setBlur] = useState(voteCount(votes) < 0);
 
@@ -82,12 +73,18 @@ const Post = ({ post }) => {
             <Row>
               <Col className="App-posts-post-title">
                 <DataConsumer>
-                  {ctx => <span onClick={() => postClick(ctx)}>{title}</span>}
+                  {ctx => (
+                    <span onClick={() => postClick(ctx)}>
+                      {revisions[0].title}
+                    </span>
+                  )}
                 </DataConsumer>
               </Col>
             </Row>
             <Row>
-              <Col className="App-posts-post-desc">{description}</Col>
+              <Col className="App-posts-post-desc">
+                {revisions[0].description}
+              </Col>
             </Row>
             <Row>
               <Col>
@@ -99,12 +96,14 @@ const Post = ({ post }) => {
                   {ctx => (
                     <span
                       className="App-posts-post-details App-posts-post-category"
-                      onClick={() => selectCategory(ctx, categoryId)}
+                      onClick={() =>
+                        selectCategory(ctx, revisions[0].categoryId)
+                      }
                     >
                       /d/
                       {
                         ctx.categories
-                          .filter(e => e.id === categoryId)
+                          .filter(e => e.id === revisions[0].categoryId)
                           .map(e => e.category)[0]
                       }
                     </span>
@@ -116,7 +115,7 @@ const Post = ({ post }) => {
                 </span>
                 <span className="App-post-details">&nbsp;·&nbsp;</span>
                 <span className="App-posts-post-details">
-                  {fromNow(timestamp)}
+                  {fromNow(revisions[0].timestamp)}
                 </span>
               </Col>
             </Row>

@@ -1,5 +1,9 @@
 import Arweave from "../Arweave.js";
 
+import moment from "moment";
+
+import { voteCount } from "../Vote";
+
 import * as config from "../../../config.json";
 
 const Comment = {
@@ -128,7 +132,7 @@ const Comment = {
     };
 
     let comments = await Arweave.get(lookup, mapper);
-    return comments.map(e => {
+    comments = comments.map(e => {
       const json = JSON.parse(e.data);
       return {
         id: e.id,
@@ -138,6 +142,25 @@ const Comment = {
         user: e.from,
         timestamp: e.timestamp
       };
+    });
+
+    // sort based on date and votes.
+    return comments.sort((i, j) => {
+      const firstDate = moment(i.timestamp).format("YYYY-MM-DD");
+      const secondDate = moment(j.timestamp).format("YYYY-MM-DD");
+
+      if (firstDate < secondDate) {
+        return -1; // i comes before j.
+      } else if (firstDate > secondDate) {
+        return 1; // j comes before i.
+      }
+
+      // Dates match. sort based on voteCount.
+      if (voteCount(i.votes) > voteCount(j.votes)) {
+        return -1; // i comes before j.
+      }
+
+      return 0; // unchanged.
     });
   }
 };
