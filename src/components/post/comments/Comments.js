@@ -7,8 +7,6 @@ import Comment from "./Comment";
 import { DataConsumer } from "../../utils/DataProvider";
 import CommentUtils from "../../utils/discuss/Comment";
 
-import "./Comments.css";
-
 const Comments = props => {
   const vote = async (ctx, vote, commentId, user) => {
     if (confirm("Are you sure you want to vote for this post?")) {

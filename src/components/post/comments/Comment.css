@@ -1,0 +1,20 @@
+.App-post-comment-unblur-trigger {
+  font-size: 24px !important;
+  color: rgb(51, 160, 255) !important;
+  cursor: pointer;
+  position: relative;
+  bottom: -4px;
+}
+
+.App-post-content.unblur {
+  line-height: 19px !important;
+  max-height: 100%;
+  transition: 0.1s;
+}
+
+.App-post-content.blur {
+  max-height: 0% !important;
+  transition: 0.1s;
+  overflow: hidden;
+  line-height: 0px !important;
+}
