@@ -12,7 +12,7 @@ import Comments from "../comments";
 import EmptyRow from "../../utils/EmptyRow";
 import { fromNow } from "../../utils/Moment";
 import { DataConsumer, DataContext } from "../../utils/DataProvider";
-import { Upvote, Downvote } from "../../utils/Vote";
+import { Upvote, Downvote, voteCount } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
 import Formatter from "../../utils/Formatter";
 
@@ -45,7 +45,9 @@ const Post = props => {
               )}
             </DataConsumer>
             <Row>
-              <Col className="App-post-vote-count">{ctx.post.votes.length}</Col>
+              <Col className="App-post-vote-count">
+                {voteCount(ctx.post.votes)}
+              </Col>
             </Row>
             <DataConsumer>
               {ctx => (
