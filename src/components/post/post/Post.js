@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import Revisions from "./Revisions";
 import Comment from "../Comment";
 import Comments from "../comments";
 
@@ -59,13 +60,14 @@ const Post = props => {
         </Col>
         <Col>
           <Row>
-            <Col className="App-post-title">
-              <span>{ctx.post.revisions[0].title}</span>
+            <Col md="8" className="App-post-title">
+              <span>{ctx.post.revisions[ctx.revision].title}</span>
             </Col>
+            <Revisions />
           </Row>
           <Row>
             <Col className="App-post-content">
-              {ctx.post.revisions[0].description}
+              {ctx.post.revisions[ctx.revision].description}
             </Col>
           </Row>
           <Row>
@@ -78,7 +80,9 @@ const Post = props => {
                 /d/
                 {
                   ctx.categories
-                    .filter(e => e.id === ctx.post.revisions[0].categoryId)
+                    .filter(
+                      e => e.id === ctx.post.revisions[ctx.revision].categoryId
+                    )
                     .map(e => e.category)[0]
                 }
               </span>
@@ -88,7 +92,7 @@ const Post = props => {
               </span>
               <span className="App-post-details">&nbsp;·&nbsp;</span>
               <span className="App-post-details">
-                {fromNow(ctx.post.revisions[0].timestamp)}
+                {fromNow(ctx.post.revisions[ctx.revision].timestamp)}
               </span>
             </Col>
           </Row>

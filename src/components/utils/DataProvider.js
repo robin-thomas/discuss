@@ -9,6 +9,7 @@ const DataProvider = props => {
   const [colorClass, setColorClass] = useState(null);
   const [page, setPage] = useState("home");
 
+  const [revision, setRevision] = useState(0);
   const [categoryId, setCategoryId] = useState(null);
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
@@ -38,7 +39,9 @@ const DataProvider = props => {
         post,
         setPost,
         loadingPosts,
-        setLoadingPosts
+        setLoadingPosts,
+        revision,
+        setRevision
       }}
     >
       {props.children}
