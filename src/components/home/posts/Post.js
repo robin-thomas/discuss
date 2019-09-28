@@ -9,6 +9,7 @@ import { Upvote, Downvote, voteCount } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
 import { DataConsumer } from "../../utils/DataProvider";
 import Moment from "../../utils/Moment";
+import { selectCategory } from "../categories/Categories";
 
 import "./Post.css";
 
@@ -96,7 +97,10 @@ const Post = ({ post }) => {
                 <span className="App-post-details">&nbsp;·&nbsp;</span>
                 <DataConsumer>
                   {ctx => (
-                    <span className="App-posts-post-details App-posts-post-category">
+                    <span
+                      className="App-posts-post-details App-posts-post-category"
+                      onClick={() => selectCategory(ctx, categoryId)}
+                    >
                       /d/
                       {
                         ctx.categories

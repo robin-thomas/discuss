@@ -122,7 +122,7 @@ const Post = {
         }
       }
     };
-    if (categoryId === undefined) {
+    if (categoryId === undefined || categoryId === null) {
       lookup.expr2 = {
         op: "equals",
         expr1: "Type",

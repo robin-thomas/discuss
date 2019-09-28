@@ -106,12 +106,15 @@
 .App-posts-post-category,
 .App-posts-post-user {
   color: rgb(255, 255, 255) !important;
-  transition: color 0.1s ease 0s;
   text-decoration: none;
-  cursor: pointer;
 }
 
-.App-posts-post-comment:hover,
+.App-posts-post-category,
+.App-posts-post-user {
+  cursor: pointer;
+  transition: color 0.1s ease 0s;
+}
+
 .App-posts-post-category:hover,
 .App-posts-post-user:hover {
   color: rgb(51, 160, 255) !important;

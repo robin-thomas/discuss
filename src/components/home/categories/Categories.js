@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -10,6 +10,17 @@ import { DataContext, DataConsumer } from "../../utils/DataProvider";
 import EmptyRow from "../../utils/EmptyRow";
 
 import "./Categories.css";
+
+const selectCategory = async (ctx, categoryId) => {
+  ctx.setLoadingPosts(true);
+  ctx.setPosts([]);
+
+  ctx.setCategoryId(categoryId);
+  const posts = await PostUtils.getPosts(categoryId);
+  ctx.setPosts(posts);
+
+  ctx.setLoadingPosts(false);
+};
 
 const Categories = props => {
   const ctx = useContext(DataContext);
@@ -27,26 +38,6 @@ const Categories = props => {
     }, 1000);
     return () => clearInterval(id);
   }, [ctx.setCategories]);
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const onClick = async (index, categoryId) => {
-    setActiveIndex(index);
-    ctx.setLoadingPosts(true);
-    ctx.setPosts([]);
-
-    // "all" category selected.
-    if (index === 0) {
-      ctx.setCategoryId(null);
-      const posts = await PostUtils.getPosts();
-      ctx.setPosts(posts);
-    } else {
-      ctx.setCategoryId(categoryId);
-      const posts = await PostUtils.getPosts(categoryId);
-      ctx.setPosts(posts);
-    }
-
-    ctx.setLoadingPosts(false);
-  };
 
   return (
     <div>
@@ -69,9 +60,9 @@ const Categories = props => {
           <Row key={index} style={{ height: "40px" }}>
             <Col
               className={`App-categories-category ${
-                index === activeIndex ? "active" : ""
+                e.id === ctx.categoryId ? "active" : ""
               } align-self-center`}
-              onClick={() => onClick(index, e.id)}
+              onClick={() => selectCategory(ctx, e.id)}
             >
               <span>{e.category}</span>
             </Col>
@@ -82,4 +73,5 @@ const Categories = props => {
   );
 };
 
+export { selectCategory };
 export default Categories;
