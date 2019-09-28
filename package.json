@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "export": "hello",
-    "deploy": "npm run build && npm run export && npm run deploy:dapp",
-    "deploy:dapp": "arweave deploy out/packaged.html --key-file arweave-keyfile.json"
+    "postbuild": "react-snap",
+    "deploy": "npm run build && npm run deploy:dapp",
+    "deploy:test": "arweave package build/index.html build/packaged.html",
+    "deploy:dapp": "arweave deploy build/packaged.html --key-file arweave-keyfile.json"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,7 +38,6 @@
   "bugs": {
     "url": "https://github.com/robin-thomas/discuss/issues"
   },
-  "homepage": "https://github.com/robin-thomas/discuss#readme",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -49,7 +50,7 @@
     ]
   },
   "devDependencies": {
-    "arweave": "^1.4.1",
+    "arweave-deploy": "^1.5.1",
     "bootstrap": "^4.3.1",
     "husky": "^3.0.5",
     "lint-staged": "^9.3.0",
@@ -58,7 +59,8 @@
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9.0",
-    "react-scripts": "^3.1.2"
+    "react-scripts": "^3.1.2",
+    "react-snap": "1.10.0"
   },
   "dependencies": {}
 }

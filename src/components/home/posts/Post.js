@@ -28,6 +28,7 @@ const Post = ({ post }) => {
   const postClick = ctx => {
     ctx.setPage("post");
     ctx.setPost(post);
+    ctx.setRevision(0);
   };
 
   const vote = async (ctx, vote) => {

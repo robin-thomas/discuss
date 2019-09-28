@@ -58,8 +58,7 @@ typings/
 .env
 
 #discuss
-out
+build
 keys.json
-piper/node_modules
+node_modules
 arweave-keyfile.json
-dist
