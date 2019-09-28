@@ -129,6 +129,8 @@ const Arweave = {
         p.email = e.data;
       } else if (e.type === "twitter" && !("twitter" in p)) {
         p.twitter = e.data;
+      } else if (e.type === "ethereum" && !("ethereum" in p)) {
+        p.ethereum = e.data;
       }
 
       return p;
