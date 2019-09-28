@@ -40,7 +40,8 @@
   font-weight: 900;
   top: 42%;
   left: 36%;
-  color: rgb(176, 184, 191);
+  color: rgb(51, 160, 255) !important;
+  /* color: rgb(176, 184, 191); */
 }
 
 .App-posts-post-blur:hover {

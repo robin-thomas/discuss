@@ -8,7 +8,8 @@ import { Row, Col } from "react-bootstrap";
 import Comment from "../Comment";
 import Comments from "../comments";
 
-import Moment from "../../utils/Moment";
+import EmptyRow from "../../utils/EmptyRow";
+import { fromNow } from "../../utils/Moment";
 import { DataConsumer, DataContext } from "../../utils/DataProvider";
 import { Upvote, Downvote } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
@@ -85,17 +86,11 @@ const Post = props => {
               </span>
               <span className="App-post-details">&nbsp;·&nbsp;</span>
               <span className="App-post-details">
-                {ctx.post.timestamp
-                  ? Moment(
-                      ctx.post.timestamp * 1000 /* milliseconds */
-                    ).fromNow()
-                  : ""}
+                {fromNow(ctx.post.timestamp)}
               </span>
             </Col>
           </Row>
-          <Row>
-            <Col>&nbsp;</Col>
-          </Row>
+          <EmptyRow />
           <DataConsumer>
             {ctx =>
               ctx.address ? (

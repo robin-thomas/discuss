@@ -5,6 +5,7 @@ import { Modal, Col, Row } from "react-bootstrap";
 import CategoryUtils from "../../utils/discuss/Category";
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
+import EmptyRow from "../../utils/EmptyRow";
 
 const Category = props => {
   const [show, setShow] = useState(false);
@@ -46,9 +47,7 @@ const Category = props => {
               />
             </Col>
           </Row>
-          <Row>
-            <Col>&nbsp;</Col>
-          </Row>
+          <EmptyRow />
           <Row>
             <Col>
               <SpinnerButton

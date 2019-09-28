@@ -2,6 +2,8 @@ import React from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import EmptyRow from "./EmptyRow";
+
 const hasVoted = (ctx, votes) => {
   return votes.filter(e => e.user === ctx.address).length > 0;
 };
@@ -27,9 +29,7 @@ const Upvote = ({ ctx, votes, user, onClick }) => {
       <Col className="App-post-vote-voted">▲</Col>
     </Row>
   ) : ctx.address && hasVoted(ctx, votes) ? (
-    <Row>
-      <Col>&nbsp;</Col>
-    </Row>
+    <EmptyRow />
   ) : ctx.address && ctx.address !== user ? (
     <Row>
       <Col className="App-post-vote-vote" onClick={onClick}>
@@ -37,21 +37,17 @@ const Upvote = ({ ctx, votes, user, onClick }) => {
       </Col>
     </Row>
   ) : (
-    <Row>
-      <Col>&nbsp;</Col>
-    </Row>
+    <EmptyRow />
   );
 };
 
 const Downvote = ({ ctx, votes, user, onClick }) => {
   return ctx.address && hasVoted(ctx, votes) && hasDownvoted(ctx, votes) ? (
     <Row>
-      <Col className="App-post-vote-vote">▼</Col>
+      <Col className="App-post-vote-voted">▼</Col>
     </Row>
   ) : ctx.address && hasVoted(ctx, votes) ? (
-    <Row>
-      <Col>&nbsp;</Col>
-    </Row>
+    <EmptyRow />
   ) : ctx.address && ctx.address !== user ? (
     <Row>
       <Col className="App-post-vote-vote" onClick={onClick}>
@@ -59,9 +55,7 @@ const Downvote = ({ ctx, votes, user, onClick }) => {
       </Col>
     </Row>
   ) : (
-    <Row>
-      <Col>&nbsp;</Col>
-    </Row>
+    <EmptyRow />
   );
 };
 

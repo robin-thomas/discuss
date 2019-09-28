@@ -23,4 +23,9 @@ Moment.updateLocale("en", {
   }
 });
 
+const fromNow = timestamp => {
+  return timestamp ? Moment(timestamp * 1000 /* milliseconds */).fromNow() : "";
+};
+
+export { fromNow };
 export default Moment;

@@ -6,6 +6,7 @@ import PostUtils from "../../utils/discuss/Post";
 import Input from "../../utils/Input";
 import SpinnerButton from "../../utils/SpinnerButton";
 import { DataConsumer } from "../../utils/DataProvider";
+import EmptyRow from "../../utils/EmptyRow";
 
 const Post = props => {
   const [show, setShow] = useState(false);
@@ -87,9 +88,7 @@ const Post = props => {
               </DataConsumer>
             </Col>
           </Row>
-          <Row>
-            <Col>&nbsp;</Col>
-          </Row>
+          <EmptyRow />
           <Row>
             <Col>
               <Input
@@ -109,9 +108,7 @@ const Post = props => {
               />
             </Col>
           </Row>
-          <Row>
-            <Col>&nbsp;</Col>
-          </Row>
+          <EmptyRow />
           <Row>
             <Col>
               <DataConsumer>

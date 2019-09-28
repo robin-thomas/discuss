@@ -8,7 +8,7 @@ import { Row, Col } from "react-bootstrap";
 import { Upvote, Downvote, voteCount } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
 import { DataConsumer } from "../../utils/DataProvider";
-import Moment from "../../utils/Moment";
+import { fromNow } from "../../utils/Moment";
 import { selectCategory } from "../categories/Categories";
 
 import "./Post.css";
@@ -25,7 +25,7 @@ const Post = ({ post }) => {
     description
   } = post;
 
-  const [blur, setBlur] = useState(votes && votes < 0 ? true : false);
+  const [blur, setBlur] = useState(voteCount(votes) < 0);
 
   const onClick = e => {
     if (e.target.classList.contains("App-posts-post-blur")) {
@@ -116,9 +116,7 @@ const Post = ({ post }) => {
                 </span>
                 <span className="App-post-details">&nbsp;·&nbsp;</span>
                 <span className="App-posts-post-details">
-                  {timestamp
-                    ? Moment(timestamp * 1000 /* milliseconds */).fromNow()
-                    : ""}
+                  {fromNow(timestamp)}
                 </span>
               </Col>
             </Row>
