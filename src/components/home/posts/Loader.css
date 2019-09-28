@@ -1,0 +1,20 @@
+.post-loader-container {
+  text-align: center;
+  margin-bottom: 10px !important;
+}
+
+.post-loader-container > div {
+  display: inline-block;
+  padding: 10px;
+  background-color: rgb(38, 38, 38);
+  border: 1px solid rgb(51, 51, 51);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px;
+}
+
+.post-loader {
+  width: 2rem !important;
+  height: 2rem !important;
+  border-width: 0.2em !important;
+  color: rgb(51, 160, 255) !important;
+}

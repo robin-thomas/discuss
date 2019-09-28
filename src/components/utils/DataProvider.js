@@ -9,9 +9,12 @@ const DataProvider = props => {
   const [colorClass, setColorClass] = useState(null);
   const [page, setPage] = useState("home");
 
+  const [categoryId, setCategoryId] = useState(null);
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({});
+
+  const [loadingPosts, setLoadingPosts] = useState(true);
 
   return (
     <DataContext.Provider
@@ -26,12 +29,16 @@ const DataProvider = props => {
         setColorClass,
         page,
         setPage,
+        categoryId,
+        setCategoryId,
         categories,
         setCategories,
         posts,
         setPosts,
         post,
-        setPost
+        setPost,
+        loadingPosts,
+        setLoadingPosts
       }}
     >
       {props.children}
