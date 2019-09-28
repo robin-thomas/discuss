@@ -29,13 +29,13 @@ const EditPost = props => {
     }
 
     console.log(
-      await PostUtils.EditPost(
+      await PostUtils.editPost(
         {
           title: post.title,
-          description: post.description,
-          postId: ctx.post.postId
+          description: post.description
         },
-        categoryId
+        categoryId,
+        ctx.post.postId
       )
     );
 

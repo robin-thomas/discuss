@@ -45,4 +45,17 @@ const Input = props => {
   );
 };
 
+const hashCode = text => {
+  let hash = 0,
+    len = text.length,
+    index = 0;
+  if (len > 0) {
+    while (index < len) {
+      hash = ((hash << 5) - hash + text.charCodeAt(index++)) | 0;
+    }
+  }
+  return hash;
+};
+
+export { hashCode };
 export default Input;

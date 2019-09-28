@@ -1,5 +1,9 @@
+import moment from "moment";
+
 import Comment from "./Comment";
 import Arweave from "../Arweave";
+
+import { voteCount } from "../Vote";
 
 import * as config from "../../../config.json";
 
@@ -142,6 +146,8 @@ const Post = {
       const votes = await Post.getVotes(postId);
       const comments = await Comment.getComments(postId);
 
+      console.log(postId, votes, comments);
+
       const transaction = await Arweave.getClient().transactions.get(postId);
       const from = await Arweave.getClient().wallets.ownerToAddress(
         transaction.get("owner")
@@ -198,35 +204,59 @@ const Post = {
     });
 
     // reduce it to include revisions (title, description, categoryId, timestamp).
-    posts = posts.reduce(
-      (p, e /* current value in the iteration */) => {
+    posts = posts.reduce((p, e) => {
+      if (p[e.postId] === undefined) {
         p[e.postId] = {
           postId: e.postId,
           votes: e.votes,
           comments: e.comments,
           user: e.user
         };
+      }
 
-        if (e.postId in p) {
-          p[e.postId].revisions = [];
-        }
-        p[e.postId].revisions.push({
-          title: e.title,
-          description: e.description,
-          categoryId: e.categoryId,
-          timestamp: e.timestamp
-        });
+      p[e.postId].votes = e.votes;
+      p[e.postId].comments = e.comments;
 
-        return p;
-      },
-      {} /* initial value of p */
-    );
+      if (!("revisions" in p[e.postId])) {
+        p[e.postId].revisions = [];
+      }
+      p[e.postId].revisions.push({
+        title: e.title,
+        description: e.description,
+        categoryId: e.categoryId,
+        timestamp: e.timestamp
+      });
+
+      return p;
+    }, {});
+
     posts = Object.keys(posts).reduce((p, key) => {
       p.push(posts[key]);
       return p;
     }, []);
 
-    return posts;
+    // sort based on date and votes.
+    return posts.sort((i, j) => {
+      const firstDate = moment(Number(i.revisions[0].timestamp)).format(
+        "YYYY-MM-DD"
+      );
+      const secondDate = moment(Number(j.revisions[0].timestamp)).format(
+        "YYYY-MM-DD"
+      );
+
+      if (moment(firstDate).isAfter(secondDate)) {
+        return -1; // i comes before j.
+      } else if (moment(firstDate).isBefore(secondDate)) {
+        return 1; // j comes before i.
+      }
+
+      // Dates match. sort based on voteCount.
+      if (voteCount(i.votes) > voteCount(j.votes)) {
+        return -1; // i comes before j.
+      }
+
+      return 0; // unchanged.
+    });
   }
 };
 

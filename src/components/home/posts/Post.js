@@ -5,6 +5,7 @@ import React, { useState } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import Formatter from "../../utils/Formatter";
 import { Upvote, Downvote, voteCount } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
 import { DataConsumer } from "../../utils/DataProvider";
@@ -83,7 +84,7 @@ const Post = ({ post }) => {
             </Row>
             <Row>
               <Col className="App-posts-post-desc">
-                {revisions[0].description}
+                {Formatter.formatText(revisions[0].description)}
               </Col>
             </Row>
             <Row>

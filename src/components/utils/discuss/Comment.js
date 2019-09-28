@@ -149,9 +149,9 @@ const Comment = {
       const firstDate = moment(i.timestamp).format("YYYY-MM-DD");
       const secondDate = moment(j.timestamp).format("YYYY-MM-DD");
 
-      if (firstDate < secondDate) {
+      if (moment(firstDate).isAfter(secondDate)) {
         return -1; // i comes before j.
-      } else if (firstDate > secondDate) {
+      } else if (moment(firstDate).isBefore(secondDate)) {
         return 1; // j comes before i.
       }
 

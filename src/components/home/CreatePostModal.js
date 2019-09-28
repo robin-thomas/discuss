@@ -2,10 +2,11 @@ import React, { useState } from "react";
 
 import { Modal, Col, Row, Form } from "react-bootstrap";
 
-import Input from "../utils/Input";
+import Input, { hashCode } from "../utils/Input";
 import SpinnerButton from "../utils/SpinnerButton";
 import { DataConsumer } from "../utils/DataProvider";
 import EmptyRow from "../utils/EmptyRow";
+import Validation from "../utils/Validation";
 
 const CreatePostModal = ({
   show,
@@ -18,8 +19,11 @@ const CreatePostModal = ({
   categoryId
 }) => {
   const [fail, setFail] = useState({
-    title: true,
-    content: true
+    title: post.title ? !Validation.title(post.title) : true,
+    content: post.description
+      ? !Validation.description(post.description)
+      : true,
+    checksum: post.title ? hashCode(post.title + post.description) : null
   });
 
   return (
@@ -35,7 +39,7 @@ const CreatePostModal = ({
               value={post.title}
               placeholder="Post title"
               validate={text => {
-                const validate = /^([a-zA-Z _-]+)$/.test(text);
+                const validate = Validation.title(text);
                 setFail(fail => {
                   return { ...fail, title: !validate };
                 });
@@ -50,19 +54,29 @@ const CreatePostModal = ({
                 <Form.Control
                   as="select"
                   size="sm"
-                  onChange={e => setPost({ ...post, category: e.target.value })}
+                  value={
+                    post.category === null
+                      ? 0
+                      : ctx.categories
+                          .map(e => e.category)
+                          .filter(e => e !== "all")
+                          .indexOf(post.category)
+                  }
+                  onChange={e =>
+                    setPost({
+                      ...post,
+                      category:
+                        ctx.categories[Number(e.target.value) + 1].category
+                    })
+                  }
                 >
                   {ctx.categories
                     .filter(e => e.category !== "all")
-                    .map((e, index) => {
-                      return categoryId === undefined || e.id !== categoryId ? (
-                        <option key={index}>{e.category}</option>
-                      ) : (
-                        <option key={index} selected>
-                          {e.category}
-                        </option>
-                      );
-                    })}
+                    .map((e, index) => (
+                      <option key={index} value={index}>
+                        {e.category}
+                      </option>
+                    ))}
                 </Form.Control>
               )}
             </DataConsumer>
@@ -76,8 +90,7 @@ const CreatePostModal = ({
               value={post.description}
               placeholder="Post content"
               validate={text => {
-                const validate =
-                  text !== null && text !== undefined && text.trim().length > 0;
+                const validate = Validation.description(text);
                 setFail(fail => {
                   return { ...fail, content: !validate };
                 });
@@ -96,7 +109,12 @@ const CreatePostModal = ({
                   variant="outline-dark"
                   text={title}
                   onClick={e => onSubmit(e, ctx)}
-                  disable={fail.title || fail.content}
+                  disable={
+                    fail.title ||
+                    fail.content ||
+                    (fail.checksum !== null &&
+                      fail.checksum === hashCode(post.title + post.description))
+                  }
                 />
               )}
             </DataConsumer>

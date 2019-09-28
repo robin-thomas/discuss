@@ -14,6 +14,7 @@ import { fromNow } from "../../utils/Moment";
 import { DataConsumer, DataContext } from "../../utils/DataProvider";
 import { Upvote, Downvote } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
+import Formatter from "../../utils/Formatter";
 
 import "./Post.css";
 
@@ -67,7 +68,9 @@ const Post = props => {
           </Row>
           <Row>
             <Col className="App-post-content">
-              {ctx.post.revisions[ctx.revision].description}
+              {Formatter.formatText(
+                ctx.post.revisions[ctx.revision].description
+              )}
             </Col>
           </Row>
           <Row>

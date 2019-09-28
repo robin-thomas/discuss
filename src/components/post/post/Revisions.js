@@ -20,7 +20,7 @@ const Revisions = props => (
             >
               {ctx.post.revisions.map((e, index) => (
                 <option key={index} value={index}>
-                  Revision {index + 1}
+                  Revision {ctx.post.revisions.length - index}
                 </option>
               ))}
             </Form.Control>

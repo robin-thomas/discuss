@@ -5,6 +5,7 @@ import { Row, Col, Modal } from "react-bootstrap";
 import Input from "../utils/Input";
 import SpinnerButton from "../utils/SpinnerButton";
 import EmptyRow from "../utils/EmptyRow";
+import Validation from "../utils/Validation";
 
 const CreateCategoryModal = ({ show, setShow, setCategory, onSubmit }) => {
   const [disableButton, setDisableButton] = useState(true);
@@ -21,7 +22,7 @@ const CreateCategoryModal = ({ show, setShow, setCategory, onSubmit }) => {
             <Input
               placeholder="Category name"
               validate={text => {
-                const validate = /^([a-zA-Z_-]+)$/.test(text) && text !== "all";
+                const validate = Validation.category(text);
                 setDisableButton(!validate);
                 setCategory(text);
                 return { validate };
