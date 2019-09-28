@@ -15,10 +15,6 @@ import * as config from "../../config.json";
 const Header = props => {
   const [show, setShow] = useState(false);
 
-  const home = ctx => {
-    ctx.setPage("home");
-  };
-
   const onClick = ctx => {
     if (ctx.address !== null) {
       // Logout.
@@ -69,7 +65,11 @@ const Header = props => {
         <Row style={{ height: "100%" }}>
           <Col md="2" className="App-header-name align-self-center">
             <DataConsumer>
-              {ctx => <span onClick={() => home(ctx)}>{config.app.name}</span>}
+              {ctx => (
+                <span onClick={() => ctx.setPage("home")}>
+                  {config.app.name}
+                </span>
+              )}
             </DataConsumer>
           </Col>
           <DataConsumer>
@@ -135,7 +135,7 @@ const Header = props => {
                 <i>Upload arweave keystore json file to login.</i>
               </p>
               <p>
-                <i>Its not stored on any servers.</i>
+                <i>Its wont be stored on any servers.</i>
               </p>
             </Col>
           </Row>
@@ -143,7 +143,11 @@ const Header = props => {
           <p>
             <b>
               Don't have an Arweave wallet? Get one{" "}
-              <a href="https://tokens.arweave.org/" target="_blank">
+              <a
+                href="https://tokens.arweave.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 here
               </a>
               !

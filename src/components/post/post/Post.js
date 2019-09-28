@@ -92,7 +92,10 @@ const Post = props => {
                 }
               </span>
               <span className="App-post-details">by</span>
-              <span className="App-post-details App-post-user">
+              <span
+                className="App-post-details App-post-user"
+                onClick={() => ctx.setPage("profile")}
+              >
                 {ctx.post.user}
               </span>
               <span className="App-post-details">&nbsp;·&nbsp;</span>

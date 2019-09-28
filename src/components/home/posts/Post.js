@@ -111,9 +111,16 @@ const Post = ({ post }) => {
                   )}
                 </DataConsumer>
                 <span className="App-posts-post-details">by</span>
-                <span className="App-posts-post-details App-posts-post-user">
-                  {user}
-                </span>
+                <DataConsumer>
+                  {ctx => (
+                    <span
+                      className="App-posts-post-details App-posts-post-user"
+                      onClick={() => ctx.setPage("profile")}
+                    >
+                      {user}
+                    </span>
+                  )}
+                </DataConsumer>
                 <span className="App-post-details">&nbsp;·&nbsp;</span>
                 <span className="App-posts-post-details">
                   {fromNow(revisions[0].timestamp)}
