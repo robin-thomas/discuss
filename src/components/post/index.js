@@ -2,8 +2,9 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
-import NewPost from "../home/categories/Post";
-import NewCategory from "../home/categories/Category";
+import CreatePost from "../home/categories/CreatePost";
+import CreateCategory from "../home/categories/CreateCategory";
+import EditPost from "../home/categories/EditPost";
 import Header from "../header";
 import Post from "./post";
 import EmptyRow from "../utils/EmptyRow";
@@ -22,8 +23,9 @@ const Home = props => (
             {ctx =>
               ctx.address ? (
                 <div>
-                  <NewPost />
-                  <NewCategory />
+                  {ctx.post.user === ctx.address ? <EditPost /> : null}
+                  <CreatePost />
+                  <CreateCategory />
                 </div>
               ) : null
             }

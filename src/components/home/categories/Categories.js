@@ -2,8 +2,9 @@ import React, { useEffect, useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
-import Post from "./Post";
-import Category from "./Category";
+import CreatePost from "./CreatePost";
+import CreateCategory from "./CreateCategory";
+
 import CategoryUtils from "../../utils/discuss/Category";
 import PostUtils from "../../utils/discuss/Post";
 import { DataContext, DataConsumer } from "../../utils/DataProvider";
@@ -45,8 +46,8 @@ const Categories = props => {
         {ctx =>
           ctx.address ? (
             <div>
-              <Post />
-              <Category />
+              <CreatePost />
+              <CreateCategory />
               <EmptyRow />
             </div>
           ) : null
