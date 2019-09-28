@@ -7,5 +7,8 @@
     "host": "arweave.net",
     "port": 443,
     "protocol": "https"
+  },
+  "avatar": {
+    "url": "https://gravatar.com/avatar/{address}?s=150&d=robohash&r=x"
   }
 }

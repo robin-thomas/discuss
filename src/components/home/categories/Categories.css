@@ -60,8 +60,8 @@
   width: 100%;
 }
 
-.App-categories-create-category,
-.App-categories-create-post {
+.App-categories-create-category > span,
+.App-categories-create-post > span {
   background: rgb(51, 160, 255);
   border-bottom: 1px solid rgb(51, 51, 51);
   background-clip: content-box;
@@ -78,7 +78,7 @@
   transition: all 0.3s;
 }
 
-.App-categories-create-category:hover,
-.App-categories-create-post:hover {
+.App-categories-create-category:hover > span,
+.App-categories-create-post:hover > span {
   filter: brightness(110%);
 }

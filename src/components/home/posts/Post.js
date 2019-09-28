@@ -115,7 +115,10 @@ const Post = ({ post }) => {
                   {ctx => (
                     <span
                       className="App-posts-post-details App-posts-post-user"
-                      onClick={() => ctx.setPage("profile")}
+                      onClick={() => {
+                        ctx.setPage("profile");
+                        ctx.setProfile(user);
+                      }}
                     >
                       {user}
                     </span>

@@ -146,8 +146,6 @@ const Post = {
       const votes = await Post.getVotes(postId);
       const comments = await Comment.getComments(postId);
 
-      console.log(postId, votes, comments);
-
       const transaction = await Arweave.getClient().transactions.get(postId);
       const from = await Arweave.getClient().wallets.ownerToAddress(
         transaction.get("owner")

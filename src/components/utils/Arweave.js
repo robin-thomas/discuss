@@ -79,6 +79,60 @@ const Arweave = {
   get: async (lookup, mapper) => {
     const txnIds = await Arweave.getClient().arql(lookup);
     return await Promise.all(txnIds.map(mapper));
+  },
+
+  account: async address => {
+    const lookup = {
+      op: "and",
+      expr1: {
+        op: "equals",
+        expr1: "App-Name",
+        expr2: "arweave-id"
+      },
+      expr2: {
+        op: "equals",
+        expr1: "from",
+        expr2: address
+      }
+    };
+
+    const mapper = async id => {
+      const transaction = await Arweave.getClient().transactions.get(id);
+
+      let type = null;
+      transaction.get("tags").forEach(tag => {
+        let key = tag.get("name", { decode: true, string: true });
+        let value = tag.get("value", { decode: true, string: true });
+
+        if (key === "Type") {
+          type = value;
+        }
+      });
+
+      return {
+        data: transaction.get("data", {
+          decode: true,
+          string: true
+        }),
+        type
+      };
+    };
+
+    const response = await Arweave.get(lookup, mapper);
+
+    // Since latest changes are on top,
+    // we wont reset any profile data we found already.
+    return response.reduce((p, e) => {
+      if (e.type === "name" && !("data" in p)) {
+        p.name = e.data;
+      } else if (e.type === "email" && !("email" in p)) {
+        p.email = e.data;
+      } else if (e.type === "twitter" && !("twitter" in p)) {
+        p.twitter = e.data;
+      }
+
+      return p;
+    }, {});
   }
 };
 

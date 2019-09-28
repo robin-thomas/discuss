@@ -14,6 +14,7 @@ const DataProvider = props => {
   const [categories, setCategories] = useState([]);
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({});
+  const [profile, setProfile] = useState(null);
 
   const [loadingPosts, setLoadingPosts] = useState(true);
 
@@ -41,7 +42,9 @@ const DataProvider = props => {
         loadingPosts,
         setLoadingPosts,
         revision,
-        setRevision
+        setRevision,
+        profile,
+        setProfile
       }}
     >
       {props.children}

@@ -1,0 +1,21 @@
+.App-profile-title {
+  color: white;
+  font-size: 15px;
+  letter-spacing: 0.07em;
+  text-decoration: underline;
+}
+
+.App-profile-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.App-profile p {
+  color: white;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.App-profile a {
+  color: black;
+}
