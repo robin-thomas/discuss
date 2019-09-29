@@ -17,7 +17,11 @@ const Comment = {
     );
   },
 
-  voteComment: async (commentId, vote) => {
+  voteComment: async (commentId, vote, user) => {
+    // if vote = 1, send 0.10 AR to the user who made the post.
+    // if vote = -1, send 0.10 AR to the miners.
+    console.log(await Arweave.transfer(user, config.arweave.tip));
+
     return await Arweave.transaction(vote, "Vote", {
       id: commentId,
       lookupType: "Comment"
