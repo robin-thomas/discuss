@@ -60,15 +60,22 @@ const Comment = {
       return {
         id: transaction.get("id"),
         from,
-        vote: transaction.get("data", {
+        data: transaction.get("data", {
           decode: true,
-          number: true
+          string: true
         }),
         transaction
       };
     };
 
-    return await Arweave.get(lookup, mapper);
+    let votes = await Arweave.get(lookup, mapper);
+    return votes.map(e => {
+      const data = JSON.parse(e.data);
+      return {
+        vote: Number(data),
+        user: e.from
+      };
+    });
   },
 
   getComments: async postId => {

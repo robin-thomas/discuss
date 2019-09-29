@@ -32,11 +32,9 @@ const Post = {
   },
 
   votePost: async (postId, vote, user) => {
-    // TODO:
     // if vote = 1, send 0.10 AR to the user who made the post.
     // if vote = -1, send 0.10 AR to the miners.
-    // await Arweave.transfer(user, config.arweave.tip);
-    console.log(user, postId);
+    console.log(await Arweave.transfer(user, config.arweave.tip));
 
     return await Arweave.transaction(vote, "Vote", {
       id: postId,
@@ -236,10 +234,10 @@ const Post = {
     // sort based on date and votes.
     return posts.sort((i, j) => {
       const firstDate = moment(Number(i.revisions[0].timestamp)).format(
-        "YYYY-MM-DD"
+        "YYYY-MM-DD HH:mm:ss"
       );
       const secondDate = moment(Number(j.revisions[0].timestamp)).format(
-        "YYYY-MM-DD"
+        "YYYY-MM-DD HH:mm:ss"
       );
 
       if (moment(firstDate).isAfter(secondDate)) {

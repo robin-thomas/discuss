@@ -22,6 +22,7 @@
 - Anyone can create a category.
 - Users will be able to vote others' posts. For upvote, 0.10 AR is tipped to post owner. For downvote, 0.10 AR is sent to miners.
 - If any post/comment has a negative vote total, it shall be blurred until the user clicks to show the content of that post/comment.
+- User profile details are pulled from Arweave ID.
 
 # Architecture
 
