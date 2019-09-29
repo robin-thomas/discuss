@@ -9,10 +9,54 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postbuild": "react-snap",
-    "deploy": "npm run build && npm run deploy:dapp",
-    "deploy:test": "arweave package build/index.html build/packaged.html",
-    "deploy:dapp": "arweave deploy build/packaged.html --key-file arweave-keyfile.json"
+    "deploy": "npm run build:static && npm run deploy:dapp",
+    "build:static": "webpack --config webpack.config.js",
+    "deploy:test": "arweave package dist/index.html dist/packaged.html",
+    "deploy:dapp": "arweave deploy dist/index.html --key-file arweave-keyfile.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robin-thomas/discuss.git"
+  },
+  "author": "Robin Thomas <robinthomas2591@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robin-thomas/discuss/issues"
+  },
+  "dependencies": {
+    "arweave": "^1.4.1",
+    "bootstrap": "^4.3.1",
+    "moment": "^2.24.0",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-dom": "^16.9.0",
+    "react-scripts": "^3.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "arweave-deploy": "^1.5.1",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^3.2.0",
+    "html-webpack-inline-source-plugin": "0.0.10",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.3.0",
+    "prettier": "^1.18.2",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,39 +72,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/robin-thomas/discuss.git"
-  },
-  "author": "Robin Thomas <robinthomas2591@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/robin-thomas/discuss/issues"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,json,md}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "arweave-deploy": "^1.5.1",
-    "bootstrap": "^4.3.1",
-    "husky": "^3.0.5",
-    "lint-staged": "^9.3.0",
-    "moment": "^2.24.0",
-    "prettier": "^1.18.2",
-    "react": "^16.9.0",
-    "react-bootstrap": "^1.0.0-beta.12",
-    "react-dom": "^16.9.0",
-    "react-scripts": "^3.1.2",
-    "react-snap": "1.10.0"
-  },
-  "dependencies": {}
+  }
 }

@@ -59,6 +59,7 @@ typings/
 
 #discuss
 build
+dist
 keys.json
 node_modules
 arweave-keyfile.json
