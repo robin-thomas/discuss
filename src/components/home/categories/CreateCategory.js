@@ -9,9 +9,11 @@ const CreateCategory = props => {
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("");
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     // create a new category.
-    console.log(await CategoryUtils.createCategory(category));
+    CategoryUtils.createCategory(category).then(console.log);
+
+    alert("Your category will be created soon!");
 
     setShow(false);
   };

@@ -109,7 +109,7 @@ const Comment = {
             break;
 
           case "UnixTime":
-            timestamp = value;
+            timestamp = Number(value);
             break;
 
           default:

@@ -13,7 +13,7 @@ const CreatePost = props => {
     category: null
   });
 
-  const onSubmit = async (e, ctx) => {
+  const onSubmit = (e, ctx) => {
     // create a new post.
     let categoryId = ctx.categories
       .filter(e => e.category === post.category)
@@ -22,15 +22,15 @@ const CreatePost = props => {
       categoryId = ctx.categories[0].id;
     }
 
-    console.log(
-      await PostUtils.createPost(
-        {
-          title: post.title,
-          description: post.description
-        },
-        categoryId
-      )
-    );
+    PostUtils.createPost(
+      {
+        title: post.title,
+        description: post.description
+      },
+      categoryId
+    ).then(console.log);
+
+    alert("Your post will be created soon!");
 
     setShow(false);
   };

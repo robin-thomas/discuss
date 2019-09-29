@@ -21,11 +21,13 @@ import "./Post.css";
 const Post = props => {
   const ctx = useContext(DataContext);
 
-  const vote = async (ctx, vote) => {
+  const vote = (ctx, vote) => {
     if (confirm("Are you sure you want to vote for this post?")) {
-      console.log(
-        await PostUtils.votePost(ctx.post.postId, vote, ctx.post.user)
+      PostUtils.votePost(ctx.post.postId, vote, ctx.post.user).then(
+        console.log
       );
+
+      alert("Your vote will be published soon!");
     }
   };
 

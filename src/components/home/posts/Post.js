@@ -31,9 +31,11 @@ const Post = ({ post }) => {
     ctx.setRevision(0);
   };
 
-  const vote = async (ctx, vote) => {
+  const vote = (ctx, vote) => {
     if (confirm("Are you sure you want to vote for this post?")) {
-      console.log(await PostUtils.votePost(postId, vote, user));
+      PostUtils.votePost(postId, vote, user).then(console.log);
+
+      alert("Your vote will be published soon!");
     }
   };
 
@@ -44,7 +46,7 @@ const Post = ({ post }) => {
           className={`${blur ? "App-posts-post-blur" : ""}`}
           onClick={onClick}
         >
-          <Col md="auto" className="App-posts-post-vote text-center px-0">
+          <Col md="1" xs="2" className="App-posts-post-vote text-center px-0">
             <div>
               <DataConsumer>
                 {ctx => (
@@ -71,7 +73,7 @@ const Post = ({ post }) => {
               </DataConsumer>
             </div>
           </Col>
-          <Col className="App-posts-post-content">
+          <Col md="11" xs="10" className="App-posts-post-content">
             <Row>
               <Col className="App-posts-post-title">
                 <DataConsumer>
@@ -89,7 +91,7 @@ const Post = ({ post }) => {
               </Col>
             </Row>
             <Row>
-              <Col>
+              <Col md="12" xs="12">
                 <span className="App-posts-post-details App-posts-post-comment">
                   {comments.length} comments
                 </span>
@@ -111,6 +113,12 @@ const Post = ({ post }) => {
                     </span>
                   )}
                 </DataConsumer>
+                <span className="App-post-details">&nbsp;·&nbsp;</span>
+                <span className="App-posts-post-details">
+                  {fromNow(revisions[0].timestamp)}
+                </span>
+              </Col>
+              <Col md="12" xs="12">
                 <span className="App-posts-post-details">by</span>
                 <DataConsumer>
                   {ctx => (
@@ -125,10 +133,6 @@ const Post = ({ post }) => {
                     </span>
                   )}
                 </DataConsumer>
-                <span className="App-post-details">&nbsp;·&nbsp;</span>
-                <span className="App-posts-post-details">
-                  {fromNow(revisions[0].timestamp)}
-                </span>
               </Col>
             </Row>
           </Col>

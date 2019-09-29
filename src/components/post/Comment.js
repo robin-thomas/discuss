@@ -12,26 +12,24 @@ import "./Comment.css";
 const Comment = props => {
   const ctx = useContext(DataContext);
 
+  const [key, setKey] = useState(Math.random().toString(36));
   const [comment, setComment] = useState(null);
   const [disableButton, setDisableButton] = useState(true);
 
-  const onSubmit = async e => {
-    console.log(await CommentUtils.createComment(ctx.post.id, comment));
+  const onSubmit = e => {
+    CommentUtils.createComment(ctx.post.postId, comment).then(console.log);
 
-    // TODO: clear the comment box.
+    alert("Your comment will be published soon!");
+
+    // clear the comment box.
+    setKey(Math.random().toString(36));
   };
 
   return (
     <div className="App-comment">
       <Row>
         <Col>
-          <p
-            style={{
-              paddingLeft: "2px",
-              fontSize: "12px",
-              marginBottom: "3px"
-            }}
-          >
+          <p className="App-comment-container">
             Comment as&nbsp;
             <span className="App-post-details App-post-comment-user">
               {ctx.address}
@@ -43,6 +41,7 @@ const Comment = props => {
         <Col>
           <div>
             <Input
+              key={key}
               as="textarea"
               placeholder="What are your throughts?"
               cls="App-comment-textarea"
@@ -57,7 +56,7 @@ const Comment = props => {
           </div>
         </Col>
       </Row>
-      <Row style={{ marginTop: "10px", marginBottom: "10px" }}>
+      <Row className="App-comment-btn-container">
         <Col md="auto" className="ml-auto">
           <SpinnerButton
             variant="outline-primary"

@@ -19,7 +19,7 @@ const EditPost = props => {
       .map(e => e.category)[0]
   });
 
-  const onSubmit = async (e, ctx) => {
+  const onSubmit = (e, ctx) => {
     // create a new post.
     let categoryId = ctx.categories
       .filter(e => e.category === post.category)
@@ -28,16 +28,16 @@ const EditPost = props => {
       categoryId = ctx.categories[0].id;
     }
 
-    console.log(
-      await PostUtils.editPost(
-        {
-          title: post.title,
-          description: post.description
-        },
-        categoryId,
-        ctx.post.postId
-      )
-    );
+    PostUtils.editPost(
+      {
+        title: post.title,
+        description: post.description
+      },
+      categoryId,
+      ctx.post.postId
+    ).then(console.log);
+
+    alert("Your edited post will be published soon!");
 
     setShow(false);
   };

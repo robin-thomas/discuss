@@ -21,3 +21,14 @@
 .App-post-comment-user:hover {
   text-decoration: underline;
 }
+
+.App-comment p.App-comment-container {
+  padding-left: 2px;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.App-comment .App-comment-btn-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

@@ -8,9 +8,11 @@ import { DataConsumer } from "../../utils/DataProvider";
 import CommentUtils from "../../utils/discuss/Comment";
 
 const Comments = props => {
-  const vote = async (ctx, vote, commentId, user) => {
+  const vote = (ctx, vote, commentId, user) => {
     if (confirm("Are you sure you want to vote for this post?")) {
-      console.log(await CommentUtils.votePost(commentId, vote, user));
+      CommentUtils.votePost(commentId, vote, user).then(console.log);
+
+      alert("Your vote will be published soon!");
     }
   };
 

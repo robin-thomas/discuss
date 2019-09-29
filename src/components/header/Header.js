@@ -63,7 +63,7 @@ const Header = props => {
     <header className="App-header">
       <Container style={{ height: "100%" }}>
         <Row style={{ height: "100%" }}>
-          <Col md="2" className="App-header-name align-self-center">
+          <Col md="2" xs="4" className="App-header-name align-self-center">
             <DataConsumer>
               {ctx => (
                 <span onClick={() => ctx.setPage("home")}>
@@ -77,18 +77,22 @@ const Header = props => {
               ctx.address !== null ? (
                 <Col
                   md="auto"
-                  className="ml-auto align-self-center App-posts-post-desc"
+                  className="d-none d-sm-block ml-auto align-self-center App-posts-post-desc"
                 >
                   <span className="App-header-address">{ctx.address}</span>
                 </Col>
               ) : (
-                <Col md="auto" className="ml-auto">
+                <Col md="auto" className="d-none d-sm-block ml-auto">
                   &nbsp;
                 </Col>
               )
             }
           </DataConsumer>
-          <Col md="auto" className="align-self-center">
+          <Col
+            md="auto"
+            xs="8"
+            className="text-right text-sm-left align-self-center"
+          >
             <DataConsumer>
               {ctx =>
                 ctx.address === null ? (
@@ -118,7 +122,7 @@ const Header = props => {
           <p>No registration. No passwords. </p>
           <br />
           <Row>
-            <Col md="3">
+            <Col md="3" xs="3">
               <DataConsumer>
                 {ctx => (
                   <Button
@@ -130,7 +134,7 @@ const Header = props => {
                 )}
               </DataConsumer>
             </Col>
-            <Col md="9" className="ml-auto">
+            <Col md="9" xs="9" className="ml-auto">
               <p>
                 <i>Upload arweave keystore json file to login.</i>
               </p>
