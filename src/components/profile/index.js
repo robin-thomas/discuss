@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
+import CreateLink from "../home/categories/CreateLink";
 import CreatePost from "../home/categories/CreatePost";
 import CreateCategory from "../home/categories/CreateCategory";
 import Header from "../header";
@@ -23,6 +24,7 @@ const Profile = props => (
             {ctx =>
               ctx.address ? (
                 <div>
+                  <CreateLink />
                   <CreatePost />
                   <CreateCategory />
                 </div>

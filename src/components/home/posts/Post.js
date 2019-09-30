@@ -79,7 +79,9 @@ const Post = ({ post }) => {
                 <DataConsumer>
                   {ctx => (
                     <span onClick={() => postClick(ctx)}>
-                      {revisions[0].title}
+                      {revisions[0].title.length < 60
+                        ? revisions[0].title
+                        : `${revisions[0].title.substr(0, 60)}...`}
                     </span>
                   )}
                 </DataConsumer>

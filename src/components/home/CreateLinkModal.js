@@ -8,7 +8,7 @@ import { DataConsumer } from "../utils/DataProvider";
 import EmptyRow from "../utils/EmptyRow";
 import Validation from "../utils/Validation";
 
-const CreatePostModal = ({
+const CreateLinkModal = ({
   show,
   setShow,
   onSubmit,
@@ -16,15 +16,10 @@ const CreatePostModal = ({
   setPost,
   title,
   description,
-  categoryId,
-  isLink
+  categoryId
 }) => {
   const [fail, setFail] = useState({
-    title: post.title
-      ? isLink
-        ? !Validation.link(post.title)
-        : !Validation.title(post.title)
-      : true,
+    title: post.title ? !Validation.link(post.title) : true,
     content: post.description
       ? !Validation.description(post.description)
       : true,
@@ -42,11 +37,9 @@ const CreatePostModal = ({
           <Col md="7">
             <Input
               value={post.title}
-              placeholder="Post title"
+              placeholder="Post link"
               validate={text => {
-                const validate = isLink
-                  ? Validation.link(text)
-                  : Validation.title(text);
+                const validate = Validation.link(text);
                 setFail(fail => {
                   return { ...fail, title: !validate };
                 });
@@ -133,4 +126,4 @@ const CreatePostModal = ({
   );
 };
 
-export default CreatePostModal;
+export default CreateLinkModal;

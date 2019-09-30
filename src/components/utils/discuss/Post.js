@@ -34,7 +34,11 @@ const Post = {
   votePost: async (postId, vote, user) => {
     // if vote = 1, send 0.10 AR to the user who made the post.
     // if vote = -1, send 0.10 AR to the miners.
-    console.log(await Arweave.transfer(user, config.arweave.tip));
+    if (vote > 0) {
+      console.log(await Arweave.transfer(user, config.arweave.tip));
+    } else {
+      console.log(await Arweave.transferToMiners(config.arweave.tip));
+    }
 
     return await Arweave.transaction(vote, "Vote", {
       id: postId,

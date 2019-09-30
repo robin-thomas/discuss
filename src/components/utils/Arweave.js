@@ -27,6 +27,27 @@ const Arweave = {
     return await Arweave.getClient().transactions.getStatus(txnId);
   },
 
+  transferToMiners: async amount => {
+    let transaction = await Arweave.getClient().createTransaction(
+      {
+        target: config.arweave.miner, // cannot send to the same user. so transferring a minimum amount to a random wallet.
+        quantity: Arweave.getClient().ar.arToWinston("0.00001"), // cannot send a transaction with quantity 0.
+        reward: Arweave.getClient().ar.arToWinston(amount) // tip sent as transaction reward to miners.
+      },
+      Arweave.wallet
+    );
+
+    await Arweave.getClient().transactions.sign(transaction, Arweave.wallet);
+    const response = await Arweave.getClient().transactions.post(transaction);
+
+    if (response.status === 400 || response.status === 500) {
+      console.log(response);
+      throw new Error("Transaction failed");
+    }
+
+    return transaction.id;
+  },
+
   transfer: async (to, amount) => {
     let transaction = await Arweave.getClient().createTransaction(
       {

@@ -33,16 +33,17 @@
   color: rgb(51, 160, 255);
 }
 
-.App-post-title > span {
+.App-post-title > span > a {
   color: rgb(255, 255, 255);
   transition: color 0.1s ease 0s;
   font-size: 15px;
   line-height: 21px;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.App-post-title > span:hover {
+.App-post-title > span > a:hover {
   color: rgb(51, 160, 255);
   text-decoration: underline;
 }

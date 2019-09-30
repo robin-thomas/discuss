@@ -6,6 +6,7 @@ import CreatePostModal from "../CreatePostModal";
 
 import PostUtils from "../../utils/discuss/Post";
 import { DataConsumer, DataContext } from "../../utils/DataProvider";
+import Validation from "../../utils/Validation";
 
 const EditPost = props => {
   const ctx = useContext(DataContext);
@@ -61,6 +62,7 @@ const EditPost = props => {
             setPost={setPost}
             onSubmit={onSubmit}
             categoryId={ctx.post.revisions[0].categoryId}
+            isLink={Validation.link(ctx.post.revisions[0].title)}
           />
         )}
       </DataConsumer>

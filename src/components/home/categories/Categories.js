@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
+import CreateLink from "./CreateLink";
 import CreatePost from "./CreatePost";
 import CreateCategory from "./CreateCategory";
 
@@ -46,6 +47,7 @@ const Categories = props => {
         {ctx =>
           ctx.address ? (
             <div>
+              <CreateLink />
               <CreatePost />
               <CreateCategory />
               <EmptyRow />

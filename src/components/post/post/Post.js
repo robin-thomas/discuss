@@ -15,6 +15,7 @@ import { DataConsumer, DataContext } from "../../utils/DataProvider";
 import { Upvote, Downvote, voteCount } from "../../utils/Vote";
 import PostUtils from "../../utils/discuss/Post";
 import Formatter from "../../utils/Formatter";
+import Validation from "../../utils/Validation";
 
 import "./Post.css";
 
@@ -66,7 +67,26 @@ const Post = props => {
         <Col>
           <Row>
             <Col md="8" className="App-post-title">
-              <span>{ctx.post.revisions[ctx.revision].title}</span>
+              <span>
+                {Validation.link(ctx.post.revisions[ctx.revision].title) ? (
+                  <a
+                    href={ctx.post.revisions[ctx.revision].title}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {ctx.post.revisions[ctx.revision].title.length < 60
+                      ? ctx.post.revisions[ctx.revision].title
+                      : `${ctx.post.revisions[ctx.revision].title.substr(
+                          0,
+                          60
+                        )}...`}
+                  </a>
+                ) : ctx.post.revisions[ctx.revision].title.length < 60 ? (
+                  ctx.post.revisions[ctx.revision].title
+                ) : (
+                  `${ctx.post.revisions[ctx.revision].title.substr(0, 60)}...`
+                )}
+              </span>
             </Col>
             <Revisions />
           </Row>

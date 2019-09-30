@@ -16,11 +16,12 @@
 
 # Features
 
-- Login using Arweave wallets. No registration required.
+- Login using Arweave wallet. No registration is required.
+- Anyone can create a category or add a post or share a link.
+- A post/link can be edited only by the user who added them.
 - There are no admins/moderators. Every user can participate in voting down bad posts or rewarding good content.
 - Any user is able to see the history of an edited post (thanks to Arweave’s Permaweb features).
-- Anyone can create a category.
-- Users will be able to vote others' posts. For upvote, 0.10 AR is tipped to post owner. For downvote, 0.10 AR is sent to miners.
+- Users will be able to vote others' posts/comments. For upvote, 0.10 AR is tipped to post/comment owner. For downvote, 0.10 AR is sent to miners.
 - If any post/comment has a negative vote total, it shall be blurred until the user clicks to show the content of that post/comment.
 - User profile details are pulled from Arweave ID.
 

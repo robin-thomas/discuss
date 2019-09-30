@@ -2,6 +2,7 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
+import CreateLink from "../home/categories/CreateLink";
 import CreatePost from "../home/categories/CreatePost";
 import CreateCategory from "../home/categories/CreateCategory";
 import EditPost from "../home/categories/EditPost";
@@ -24,6 +25,7 @@ const Home = props => (
               ctx.address ? (
                 <div>
                   {ctx.post.user === ctx.address ? <EditPost /> : null}
+                  <CreateLink />
                   <CreatePost />
                   <CreateCategory />
                 </div>
