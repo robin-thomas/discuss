@@ -7,7 +7,7 @@
     "host": "arweave.net",
     "port": 443,
     "protocol": "https",
-    "tip": "0.01",
+    "tip": "0.1",
     "miner": "7NKY-jZVV1wEniz3CRdCcHbZLaGslq0bV8F8ssm2Zw4"
   },
   "avatar": {
