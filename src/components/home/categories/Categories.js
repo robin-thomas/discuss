@@ -14,6 +14,11 @@ import EmptyRow from "../../utils/EmptyRow";
 import "./Categories.css";
 
 const selectCategory = async (ctx, categoryId) => {
+  // Chosen category is same as the current category. No need to load anything.
+  if (categoryId === ctx.categoryId) {
+    return;
+  }
+
   ctx.setLoadingPosts(true);
   ctx.setPosts([]);
 

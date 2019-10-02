@@ -54,6 +54,7 @@ const CreateLinkModal = ({
                 <Form.Control
                   as="select"
                   size="sm"
+                  className="category-selection"
                   value={
                     post.category === null
                       ? 0

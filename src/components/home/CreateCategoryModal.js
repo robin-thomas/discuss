@@ -6,6 +6,7 @@ import Input from "../utils/Input";
 import SpinnerButton from "../utils/SpinnerButton";
 import EmptyRow from "../utils/EmptyRow";
 import Validation from "../utils/Validation";
+import { DataConsumer } from "../utils/DataProvider";
 
 const CreateCategoryModal = ({ show, setShow, setCategory, onSubmit }) => {
   const [disableButton, setDisableButton] = useState(true);
@@ -19,15 +20,19 @@ const CreateCategoryModal = ({ show, setShow, setCategory, onSubmit }) => {
         <br />
         <Row>
           <Col md="7">
-            <Input
-              placeholder="Category name"
-              validate={text => {
-                const validate = Validation.category(text);
-                setDisableButton(!validate);
-                setCategory(text);
-                return { validate };
-              }}
-            />
+            <DataConsumer>
+              {ctx => (
+                <Input
+                  placeholder="Category name"
+                  validate={text => {
+                    const validate = Validation.category(text, ctx.categories);
+                    setDisableButton(!validate);
+                    setCategory(text);
+                    return { validate };
+                  }}
+                />
+              )}
+            </DataConsumer>
           </Col>
         </Row>
         <EmptyRow />

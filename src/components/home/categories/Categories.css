@@ -19,6 +19,7 @@
 .App-categories-category {
   font-size: 15px;
   color: rgb(255, 255, 255);
+  text-transform: lowercase;
 }
 
 .App-categories-category > span {

@@ -11,7 +11,7 @@ const Home = props => (
     <Header />
     <Container>
       <Row>
-        <Col md="9" xs="12">
+        <Col md="9" xs="12" className="App-posts-col">
           <Posts />
         </Col>
         <Col md="3" xs="12">

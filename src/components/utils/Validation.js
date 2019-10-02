@@ -1,6 +1,16 @@
 const Validation = {
-  category: text => {
-    return /^([a-zA-Z_-]+)$/.test(text) && text !== "all";
+  category: (text, categories) => {
+    let validate = /^([a-zA-Z_-]+)$/.test(text) && text !== "all";
+    if (!validate) {
+      return false;
+    }
+
+    // Verify that the category name hasnt already been taken.
+    validate =
+      categories
+        .map(e => e.category.toLowerCase())
+        .filter(e => e === text.toLowerCase()).length > 0;
+    return !validate; // if true, then an existing category with same name exists.
   },
 
   title: text => {
