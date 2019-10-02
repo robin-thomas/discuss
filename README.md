@@ -19,7 +19,7 @@ https://arweave.net/NzsHAeS5JXNmy3In0Vr5j4FZEW_6dvLqQtvUEkE7M1k
 # Features
 
 - Login using Arweave wallet. No registration is required.
-- Anyone can create a category or add a post or share a link.
+- Anyone can create a category or add a post or share a link or add a comment.
 - A post/link can be edited only by the user who added them.
 - There are no admins/moderators. Every user can participate in voting down bad posts or rewarding good content.
 - Any user is able to see the history of an edited post (thanks to Arweave’s Permaweb features).
