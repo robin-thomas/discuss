@@ -6,6 +6,8 @@ import Loader from "./Loader";
 import NoPosts from "./NoPosts";
 import { DataContext, DataConsumer } from "../../utils/DataProvider";
 
+import "./Posts.css";
+
 const Posts = props => {
   const ctx = useContext(DataContext);
 
