@@ -20,16 +20,30 @@ const Comment = {
   voteComment: async (commentId, vote, user) => {
     // if vote = 1, send 0.10 AR to the user who made the post.
     // if vote = -1, send 0.10 AR to the miners.
-    if (vote > 0) {
-      console.log(await Arweave.transfer(user, config.arweave.tip));
-    } else {
-      console.log(await Arweave.transferToMiners(config.arweave.tip));
+    try {
+      if (Number(vote) > 0) {
+        console.log(await Arweave.transfer(user, config.arweave.tip));
+      } else {
+        console.log(await Arweave.transferToMiners(config.arweave.tip));
+      }
+    } catch (err) {
+      if (Number(vote) > 0) {
+        throw new Error(`Failed to reward ${config.arweave.tip}AR to ${user}`);
+      } else {
+        throw new Error(
+          `Failed to reward ${config.arweave.tip}AR to the miners`
+        );
+      }
     }
 
-    return await Arweave.transaction(vote, "Vote", {
-      id: commentId,
-      lookupType: "Comment"
-    });
+    try {
+      return await Arweave.transaction(vote, "Vote", {
+        id: commentId,
+        lookupType: "Comment"
+      });
+    } catch (err) {
+      throw new Error("Failed to make a vote transaction!");
+    }
   },
 
   getVotes: async commentId => {

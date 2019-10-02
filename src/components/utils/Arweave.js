@@ -70,7 +70,8 @@ const Arweave = {
   transaction: async (data, type, lookup) => {
     let transaction = await Arweave.getClient().createTransaction(
       {
-        data: JSON.stringify(data)
+        data: JSON.stringify(data),
+        reward: Arweave.getClient().ar.arToWinston("0.001")
       },
       Arweave.wallet
     );

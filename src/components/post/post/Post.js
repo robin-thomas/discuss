@@ -24,11 +24,12 @@ const Post = props => {
 
   const vote = (ctx, vote) => {
     if (confirm("Are you sure you want to vote for this post?")) {
-      PostUtils.votePost(ctx.post.postId, vote, ctx.post.user).then(
-        console.log
-      );
-
-      alert("Your vote will be published soon!");
+      PostUtils.votePost(ctx.post.postId, vote, ctx.post.user)
+        .then(txId => {
+          console.log(`Transaction ID: ${txId}`);
+          alert("Your vote will be published soon!");
+        })
+        .catch(alert);
     }
   };
 

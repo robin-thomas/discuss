@@ -33,9 +33,12 @@ const Post = ({ post }) => {
 
   const vote = (ctx, vote) => {
     if (confirm("Are you sure you want to vote for this post?")) {
-      PostUtils.votePost(postId, vote, user).then(console.log);
-
-      alert("Your vote will be published soon!");
+      PostUtils.votePost(postId, vote, user)
+        .then(txId => {
+          console.log(`Transaction ID: ${txId}`);
+          alert("Your vote will be published soon!");
+        })
+        .catch(alert);
     }
   };
 

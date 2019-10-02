@@ -10,9 +10,12 @@ import CommentUtils from "../../utils/discuss/Comment";
 const Comments = props => {
   const vote = (ctx, vote, commentId, user) => {
     if (confirm("Are you sure you want to vote for this post?")) {
-      CommentUtils.voteComment(commentId, vote, user).then(console.log);
-
-      alert("Your vote will be published soon!");
+      CommentUtils.voteComment(commentId, vote, user)
+        .then(txId => {
+          console.log(`Transaction ID: ${txId}`);
+          alert("Your vote will be published soon!");
+        })
+        .catch(alert);
     }
   };
 
